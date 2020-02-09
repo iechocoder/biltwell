@@ -1,0 +1,79 @@
+<div id="product-reviews" class="row product__reviews">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="reviews">
+
+                    <div class="review-head">
+                        <h2>{{section.settings.title}}</h2>
+                        <div class="review-col">
+                            <h3>{{section.settings.subtitle}}</h3>
+                            <p>{{section.settings.info_line}}</p>
+                        </div>
+                        <div class="review-col customer-rating">
+                                <h3>{{section.settings.rightcolumn}}</h3>
+                                <p>{{ product.metafields.spr.reviews }}</p>
+                                <a class="review-link" href="#" onclick="StampedFn.toggleForm('review','{{ product.id }}');return false">{{section.settings.reviewbutton}}</a><br>
+                                <!--<a class="review-link" href="#" onclick="StampedFn.toggleForm('question','{{ product.id }}');return false">{{section.settings.questiobutton}}</a><br>-->
+                        </div>
+                    </div>
+
+                    <div id="stamped-main-widget"
+                    data-widget-style="standard"
+                    data-product-id="{{ product.id }}"
+                    data-name="{{ product.title | escape }}"
+                    data-url="{{ shop.url }}{{ product.url }}"
+                    data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
+                    data-description="{{ product.description | escape }}"
+                    data-product-sku="{{product.handle}}"
+                    >
+                        {{ product.metafields.stamped.reviews }}
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Reviews",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Heading",
+        "default": "Reviews"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Heading",
+        "default": "Rating Snapshot"
+      },
+      {
+        "type": "text",
+        "id": "info_line",
+        "label": "Info Line",
+        "default": "Select a row below to filter reviews."
+      },
+      {
+        "type": "text",
+        "id": "rightcolumn",
+        "label": "Right Heading",
+        "default": "Average customer rating"
+      },
+      {
+        "type": "text",
+        "id": "reviewbutton",
+        "label": "Review Button",
+        "default": "Write a review"
+      },
+      {
+        "type": "text",
+        "id": "questiobutton",
+        "label": "Question Button",
+        "default": "Add a question"
+      }
+    ]
+  }
+{% endschema %}

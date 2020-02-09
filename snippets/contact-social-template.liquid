@@ -1,0 +1,57 @@
+<ul class="footer-socialicons">
+    {% if settings.social_facebook_link != blank %}
+        <li>
+            <a href=" {{ settings.social_facebook_link }} " target="_blank">
+                {% include 'svg-fb-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_twitter_link != blank %}
+        <li>
+            <a href=" {{ settings.social_twitter_link }} " target="_blank">
+                {% include 'svg-tw-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_instagram_link != blank %}
+        <li>
+            <a href=" {{ settings.social_instagram_link }} " target="_blank">
+                {% include 'svg-ig-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_pinterest_link != blank %}
+        <li>
+            <a href=" {{ settings.social_pinterest_link }} " target="_blank">
+                {% include 'svg-pi-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_youtube_link != blank %}
+        <li>
+            <a href=" {{ settings.social_youtube_link }} " target="_blank">
+                {% include 'svg-yt-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_tumblr_link != blank %}
+        <li>
+            <a href=" {{ settings.social_tumblr_link }} " target="_blank">
+                {% include 'svg-tm-black' %}
+            </a>
+        </li>
+    {%endif%}
+
+    {% if settings.social_yelp_link != blank %}
+        <li>
+            <a href=" {{ settings.social_yelp_link }} " target="_blank">
+                {% include 'svg-yp-black' %}
+            </a>
+        </li>
+    {%endif%}
+</ul>

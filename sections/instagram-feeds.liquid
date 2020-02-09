@@ -1,0 +1,42 @@
+{% if section.settings.section_enabled and  section.settings.account  %} 
+    <section class="ride-motorcycle-row wow slideInLeft" data-wow-duration="2s">
+        <div class="ride-motorcycle-title">
+            {% include 'svg-instagram'%}
+            <h5> {{ section.settings.title }} <a href="https://www.instagram.com/biltwell/?hl=en" target="_blank">{{section.settings.account}}</a></h5>
+        </div>
+        <div class="ride-motorcyle-grid">
+            <div data-is data-is-api="//insta-api.gohrvst.com/api/" data-is-source="{{section.settings.account}}" data-is-limit="5" data-is-columns='5' data-is-gutter='25' data-is-rows="1" data-is-arrows-control="false" data-is-drag-control="false" data-is-scrollbar="false" data-is-color-gallery-overlay="rgba(188, 188, 188, 0.6)" data-is-loop="false" data-is-mode="instagram" data-is-info="likesCounter" data-is-responsive='{ "768": { "columns": 2, "rows": 2 }}'></div>
+        </div>
+    </section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Instagram Feeds",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"section_enabled",
+        "label":"Show Feeds",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "RIDE MOTORCYCLES. HAVE FUN"
+      },
+      {
+        "type": "text",
+        "id": "account",
+        "label": "Account",
+        "default": "@biltwell"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Instagram Feeds",
+        "category": "promotional"
+      }
+    ]
+  }
+{% endschema %}

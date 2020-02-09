@@ -1,0 +1,160 @@
+<style type="text/css">
+  .unique-{{ section.id}} .gridbox-link {
+    {%if section.settings.buttontxtcolor %}color:{{section.settings.buttontxtcolor}} !important; {%endif%}
+    {%if section.settings.buttonborder %} border:1px solid {{section.settings.buttonborder}} !important;{%endif%}
+    {%if section.settings.buttonbgcolor %} background-color:{{section.settings.buttonbgcolor}} !important;{%endif%}
+  }
+  .unique-{{ section.id}} .gridbox-link:hover{
+    {%if section.settings.button_mouseover_txt_color %}color:{{section.settings.button_mouseover_txt_color}} !important; {%endif%}
+    {%if section.settings.button_mouseover_color %} background-color:{{section.settings.button_mouseover_color}} !important;{%endif%}
+    {%if section.settings.button_mouseover_brdr_color %} border:1px solid {{section.settings.button_mouseover_brdr_color}} !important;{%endif%}   
+  } 
+  .unique-{{ section.id}} p {
+    {%if section.settings.description_color %}color:{{section.settings.description_color}} !important; {%endif%}
+  }
+</style>
+<section class="image-left-row  unique-{{ section.id}} {% if section.settings.nomargin_enabled %} nomargin {%else%} addmargin {%endif%}"
+    style="{% if section.settings.section_background != blank%}background:{{section.settings.section_background}};{%endif%}">
+	{% if section.settings.video_alignment == 'left' and section.settings.column_division == '70%' %} 
+  		<div class="row no-gutters">
+    		<div class="col-sm-12 col-md-6 col-lg-7 wow fadeInLeft" data-wow-duration="2s" data-wow-offset="100">
+      			<div class="gridbox-thumbnail hideonmobile-left">
+                  {% if section.settings.videoimage != blank %}
+                      <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.video_alignment}};" class="grid-thumbnail"/>
+                  {%else%}
+                      {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                  {%endif%}
+      			</div>
+    		</div>
+    		<div class="col-sm-12 col-md-6 col-lg-5 wow fadeInRight" data-wow-duration="2s" data-wow-offset="100">
+      			<div class="gridbox-detail">
+                  {%if section.settings.title != blank%}
+                     <h2 class="gridbox-title" {% if section.settings.heading_color != blank%} style="color:{{section.settings.heading_color}}"{%endif%} >
+                        {{ section.settings.title }}
+                     </h2>
+                  {% endif %}
+                  {%if section.settings.text != blank %} {{ section.settings.text }}{% endif %}
+                      {%if section.settings.button_link != blank and section.settings.button_text != blank%}
+                          <a class="gridbox-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+                      {% endif %}
+      			</div>
+            	<div class="gridbox-thumbnail showonmobile-left">
+                  {% if section.settings.videoimage != blank %}
+                      <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.layout}};" class="grid-thumbnail"/>
+                  {%else%}
+                  	  {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+              	  {%endif%}
+            	</div>
+    		</div>
+  		</div>
+  	{%endif%}
+  
+  	{% if section.settings.video_alignment == 'right' and section.settings.column_division == '70%' %} 
+  		<div class="row no-gutters right">
+    		<div class="col-sm-12 col-md-6 col-lg-5 wow fadeInLeft" data-wow-duration="2s" data-wow-offset="100">
+      			<div class="gridbox-detail">
+                  {%if section.settings.title != blank%}
+                       <h2 class="gridbox-title" {% if section.settings.heading_color != blank%} style="color:{{section.settings.heading_color}}"{%endif%} >
+                          {{ section.settings.title }}
+                       </h2>
+                  {% endif %}  
+                  {%if section.settings.text != blank %} {{ section.settings.text }}{% endif %}
+                   {%if section.settings.button_link != blank and section.settings.button_text != blank%}
+                      <a class="gridbox-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+                   {% endif %}
+      			</div>
+      			<div class="gridbox-thumbnail showonmobile-left">
+                  {% if section.settings.videoimage != blank %}
+                      <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.video_alignment}};" class="grid-thumbnail"/>
+                  {%else%}
+                      {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                  {%endif%}
+      			</div>
+    		</div>
+    		<div class="col-sm-12 col-md-6 col-lg-7 wow fadeInRight" data-wow-duration="2s" data-wow-offset="100">
+              <div class="gridbox-thumbnail hideonmobile-left">
+                {% if section.settings.videoimage != blank %}
+                    <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.layout}};" class="grid-thumbnail"/>
+                {%else%}
+                    {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                {%endif%}
+              </div>
+    		</div>
+  		</div>
+  	{%endif%}
+  
+  	{% if section.settings.column_division == '50%' %}
+
+    {% if section.settings.video_alignment == 'left' and section.settings.column_division == '50%' %} 
+      
+      	<div class="row no-gutters">
+          	<div class="col-sm-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-duration="2s" data-wow-offset="100">
+              <div class="gridbox-thumbnail hideonmobile-left">
+                {% if section.settings.videoimage != blank %}
+                    <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.video_alignment}};" class="grid-thumbnail"/>
+                {%else%}
+                    {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                {%endif%}
+              </div>
+          </div>
+    		<div class="col-sm-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-duration="2s" data-wow-offset="100">
+              <div class="gridbox-detail-col6 gridbox-detail-col6-right">
+                {%if section.settings.title != blank%}
+                     <h2 class="gridbox-title" {% if section.settings.heading_color != blank%} style="color:{{section.settings.heading_color}}"{%endif%} >
+                        {{ section.settings.title }}
+                     </h2>
+                {% endif %}
+                {%if section.settings.text != blank %} <span class="ellipsis-text">{{ section.settings.text }}</span>{% endif %}
+                 {%if section.settings.button_link != blank and section.settings.button_text != blank%}
+                    <a class="gridbox-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+                  {% endif %}
+              </div>
+              <div class="gridbox-thumbnail showonmobile-left">
+                {% if section.settings.videoimage != blank %}
+                    <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.layout}};" class="grid-thumbnail"/>
+                {%else%}
+                    {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                {%endif%}
+              </div>
+    		</div>
+  		</div>
+  
+  	{%endif%}
+  
+  	{% if section.settings.video_alignment == 'right' and section.settings.column_division == '50%' %} 
+  		<div class="row no-gutters right">
+    		<div class="col-sm-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-duration="2s" data-wow-offset="100">
+      			<div class="gridbox-detail-col6">
+                  {%if section.settings.title != blank%}
+                       <h2 class="gridbox-title" {% if section.settings.heading_color != blank%} style="color:{{section.settings.heading_color}}"{%endif%} >
+                          {{ section.settings.title }}
+                       </h2>
+                  {% endif %}
+       
+                  {%if section.settings.text != blank %} {{ section.settings.text }}{% endif %}
+                   {%if section.settings.button_link != blank and section.settings.button_text != blank%}
+                      <a class="gridbox-link" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+                    {% endif %}
+
+      			</div>
+      			<div class="gridbox-thumbnail showonmobile-left">
+                  {% if section.settings.videoimage != blank %}
+                      <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.video_alignment}};" class="grid-thumbnail"/>
+                  {%else%}
+                      {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                  {%endif%}
+      			</div>
+    		</div>
+    		<div class="col-sm-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-duration="2s" data-wow-offset="100">
+                <div class="gridbox-thumbnail hideonmobile-left">
+                  {% if section.settings.videoimage != blank %}
+                      <img src="{{ section.settings.videoimage | img_url:'814x694' }}" style="float:{{section.settings.layout}};" class="grid-thumbnail"/>
+                  {%else%}
+                      {{ 'gearbag.png' | asset_url | img_tag : 'Left Image' , 'grid-thumbnail' , 'master' }}
+                  {%endif%}
+                </div>
+    		</div>
+  		</div>
+      {%endif%}
+  {% endif %}
+</section>

@@ -1,0 +1,7 @@
+<li>
+  <a href="{{product.url}}">
+    <img class="rec-icon" src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.image.alt}}">
+    <p class="shortdesc">{{ product.title }}</p>
+    <p class="price">{{ product.price | money }}</p>
+    </a>
+</li>

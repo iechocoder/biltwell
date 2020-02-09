@@ -1,0 +1,28 @@
+{% if section.settings.fullwidth_image_enabled %}
+    <section class="full-width-image">
+        <div class="f-img-col wow fadeInUp" data-wow-duration="2s">
+            <img src="{{ section.settings.fullwidth_product_image | img_url: 'master' }}"/>
+        </div>
+    </section>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Full Width Image",
+    "settings": [
+     {
+        "type": "checkbox",
+        "id": "fullwidth_image_enabled",
+        "label": "Full Width Image",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "fullwidth_product_image",
+        "label": "Image"
+      }
+    
+    ]
+  }
+{% endschema %}
+

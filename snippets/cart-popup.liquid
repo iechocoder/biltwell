@@ -1,0 +1,76 @@
+<style>
+.cart-overlay {
+    z-index: 999;
+}
+
+.cart-popup {
+    right: -15px;
+    top: 60%;
+    bottom: auto;
+    left: auto;
+    z-index: 9999;
+}
+
+.cart-popup .empty-cart-msg {
+    padding: 25px 30px 10px;
+}
+
+.nav-item--cart {
+    position: relative !important;
+}
+</style>
+<!-- cart-popup-start -->
+<span class="cart-overlay"></span>
+<div class="cart-popup">
+    <div class="cart-bg-inner">
+        <h2>You have <span class="items-count">{{ cart.item_count }} </span> item(s) in your cart</h2>
+
+        <form action="/cart" method="post" novalidate>
+            <div class="cart-popup-inner">
+                {% if cart.item_count > 0 %}
+                    {% for item in cart.items %}
+                        <div class="cart-popup-item">
+                            <div class="cart-photo">
+                                {{ item | img_url | img_tag: item.title }}
+                            </div>
+
+                            <div class="cart-desc">
+                                <h4><a href="{{ item.url }}" class="product-name" data-variant="{{ item.variant_id }}">{{ item.product.title }}</a></h4>
+                                <div class="selected-item">
+                                    {% unless item.product.has_only_default_variant %}
+                                        <label>{{ item.variant.title }}</label>
+                                    {% endunless %}
+                                    <input class="qty form-control"
+                                        type="number"
+                                        name="updates[]"
+                                        id="updates_{{ item.key }}"
+                                        value="{{ item.quantity }}"
+                                        min="0"
+                                        aria-label="{{ 'cart.general.item_quantity' | t }}">
+                                </div>
+                            </div>
+
+                            <div class="cart-item-right">
+                                <div class="cart-amount">{{ item.price | money }}</div>
+                                <div class="remove-cart">
+                                    <a class="remove-cart remove-cart-btn" href="/cart/change?line={{ forloop.index }}&quantity=0" data-line="{{ forloop.index }}">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <p class="empty-cart-msg"{% if cart.item_count > 0 %} style="display: none;"{% endif %}>Uhh Oh, Looks like you haven't added anything yet. <a href="/">Continue Shopping</a></p>
+
+            <div class="cart-popup-footer"{% if cart.item_count == 0 %} style="display: none;"{% endif %}>
+                <div class="subtotal">
+                    <strong>Subtotal</strong>
+                    <strong>{{ cart.total_price | money }}</strong>
+                </div>
+                <input type="submit" name="checkout" class="btn btn-block" value="Checkout"/>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- cart-popup-end -->

@@ -1,0 +1,194 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Biltwell Shopify Theme",
+    "theme_version": "1.1.5",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https:\/\/sellry.com",
+    "theme_support_url": "https:\/\/sellry.com"
+  },
+  {
+    "name": "Product column info",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Do not modify unless you know what you're doing!"
+      },
+      {
+        "type": "text",
+        "id": "description_hero",
+        "label": "Description Hero",
+        "default": "<strong>Overview:<\/strong>"
+      },
+      {
+        "type": "text",
+        "id": "description_first_column_match",
+        "label": "Description First Column",
+        "default": "<strong>Technical Details<\/strong>"
+      },
+      {
+        "type": "text",
+        "id": "description_second_column_match",
+        "label": "Description Second Column (more than one)",
+        "default": "<strong>Helmet Fitment<\/strong>,<strong>Install Tips<\/strong>,<strong>Form and Function<\/strong>,<strong>Care and Maintenance<\/strong>"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#c4cdd5",
+        "info": "Buttons and special ornaments"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Text",
+        "default": "#161d25"
+      },
+      {
+        "type": "color",
+        "id": "color_main_bg",
+        "label": "Background",
+        "default": "#fff"
+      }
+    ]
+  },
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_columns",
+        "label": "Desktop - Collection Columns",
+        "default": "col-md-4",
+        "info": "How many columns you want to appear on the collection page",
+        "options": [
+          {
+            "value": "col-md-4",
+            "label": "3 Columns"
+          },
+          {
+            "value": "col-md-3",
+            "label": "4 Columns"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "helvetica_n4",
+        "label": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "helvetica_n4",
+        "label": "Body text"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_yelp_link",
+        "label": "Yelp link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

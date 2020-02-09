@@ -1,0 +1,58 @@
+<!-- cart-sidebar start -->
+<div class="cart-sidebar">
+    <div class="cart-sideba-bg">
+        <div class="cart-sidebar-title">
+            <a href="#" class="back-sidebar"></a>
+            {{ 'cart.general.title' | t }}
+        </div>
+
+        <form action="/cart" method="post" novalidate>
+            <div class="cart-sidebar-inner">
+                {% if cart.item_count > 0 %}
+
+                    <div class="cart-popup-items">
+                        {% for item in cart.items %}
+
+                            <div class="cart-popup-item">
+                                <div class="cart-photo">
+                                    {{ item | img_url | img_tag: item.title }}
+                                </div>
+
+                                <div class="cart-desc">
+                                    <h4><a href="{{ item.url }}" class="product-name" data-variant="{{ item.variant_id }}">{{ item.product.title }}</a></h4>
+                                    <div class="selected-item">
+                                        {% unless item.variant.title == blank %}
+                                            <label>{{ item.variant.title }}</label>
+                                        {% endunless %}
+                                        <input class="qty form-control"
+                                            type="number"
+                                            name="updates[]"
+                                            id="updates_{{ item.key }}"
+                                            value="{{ item.quantity }}"
+                                            min="0"
+                                            aria-label="{{ 'cart.general.item_quantity' | t }}">
+                                    </div>
+                                </div>
+                                <div class="cart-item-right">
+                                    <div class="cart-amount">{{ item.price | money }}</div>
+                                    <div class="remove-cart"><a class="remove-cart remove-cart-btn" href="/cart/change?line={{ forloop.index }}&quantity=0" data-line="{{ forloop.index }}">Remove</a></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <p class="empty-cart-msg"{% if cart.item_count > 0 %} style="display: none;"{% endif %}>Uhh Oh, Looks like you haven't added anything yet. <a href="/">Continue Shopping</a></p>
+            </div>
+
+            <div class="cart-popup-footer cart-sidebar-footer"{% if cart.item_count == 0 %} style="display: none;"{% endif %}>
+                <div class="subtotal">
+                    <strong>Subtotal</strong>
+                    <strong>{{ cart.total_price | money }}</strong>
+                </div>
+                <input type="submit" name="checkout" class="btn btn-block" value="Checkout"/>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- cart-sidebar end -->

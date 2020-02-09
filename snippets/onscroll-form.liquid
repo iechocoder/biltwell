@@ -1,0 +1,117 @@
+{% if collection_to_use %}
+<div class="onscroll-inner">
+  <div class="scroll-color">
+    {% for colorproduct_scroll_label in collections[collectionhandle].products %}
+     	{% assign colorname_scroll_label =  colorproduct_scroll_label.title | split: ' - ' %}
+     	{% assign splitspace_scroll_label = colorname_scroll_label[1] | strip%}
+     	{% assign replacespace_scroll_label = splitspace_scroll_label | replace: ' ','-' | downcase %}
+     	{% assign colorswatch_scroll_label = replacespace_scroll_label | replace: '/','-' %}
+    		{% if product.title == colorproduct_scroll_label.title %}
+    			{% include 'onscroll-color-swatch' %}
+    		{% endif %}
+    {% endfor %}
+   <select id="colorswatch-scroll" name="color-select" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+
+     {% for colorproduct_scroll in collections[collectionhandle].products %}
+     	{% assign colorname_scroll =  colorproduct_scroll.title | split: ' - ' %}
+     	{% assign splitspace_scroll = colorname_scroll[1] | strip%}
+     	{% assign replacespace_scroll = splitspace_scroll | replace: ' ','-' | downcase %}
+     	{% assign colorswatch_scroll = replacespace_scroll | replace: '/','-' %}
+
+     	<option {% if product.title == colorproduct_scroll.title%} selected {% endif %} value="{{colorproduct_scroll.url}}">{{colorswatch_scroll | replace: '-', ' ' }}</option>
+
+     {% endfor %}
+   </select>
+  </div>
+
+{% endif %}
+
+{% form "product", product, data-productid: product.id %}
+<div class="add-to-cart">
+  <div class="pro-select">
+    {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+    <div class="selector-wrapper size-input js">
+
+      <div class="options-list">
+        {% for value in option.values %}
+        <div class="text-center list-tag">
+          <input class="radio-custom" type="radio" name="properties[{{ option.name }}]"
+                 id="{{option.name}}-{{ forloop.index0 }}"
+                 data-single-option-selector
+                 data-index="option{{ option.position }}"
+                 value="{{ value | escape }}"
+                 >
+          <label for="{{option.name}}-{{ forloop.index0 }}">
+            {% assign sizevalue =  value | escape %}
+            {% if sizevalue == 'X-SMALL' or sizevalue == 'X-Small'%}
+            {% assign optionvalue = 'XS' %}
+            {%endif%}
+            {% if sizevalue == 'SMALL' or sizevalue == 'Small'%}
+            {% assign optionvalue = 'S' %}
+            {%endif%}
+            {% if sizevalue == 'MEDIUM' or sizevalue == 'Medium' %}
+            {% assign optionvalue = 'M' %}
+            {%endif%}
+            {% if sizevalue == 'LARGE' or sizevalue == 'Large' %}
+            {% assign optionvalue = 'L' %}
+            {%endif%}
+            {% if sizevalue == 'X-LARGE' or sizevalue == 'X-Large' %}
+            {% assign optionvalue = 'XL' %}
+            {%endif%}
+            {% if sizevalue == 'XX-LARGE' or sizevalue == 'XX-Large' %}
+            {% assign optionvalue = 'XXL' %}
+            {%endif%}
+            <span class="value">{{ optionvalue }}</span>
+
+          </label>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    {% endfor %}
+    {% endunless %}
+  </div>
+
+
+  <div class="product-option">
+    <select style="display:none" name="id" class="no-js" data-product-select>
+      <option value="" selected>Select Option</option>
+      {% for variant in product.variants %}
+      <option
+              {% if variant == current_variant %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled="disabled"{% endunless %}
+              value="{{ variant.id }}">
+        {{ variant.title }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+</div><!-- end row -->
+
+<div class="product-atc">
+  <div class="product-quantity">
+    <!-- <label for="quantity">Quantity </label> -->
+    <input min="1" type="number" id="quantity" name="quantity" value="1" />
+
+  </div>
+  <div class="atc-col">
+    <button type="submit"
+            name="add"
+            class="btn btn-red product__add-to-cart btn-full-width"
+            data-add-to-cart
+            {% unless current_variant.available %}disabled{% endunless %}>
+      <span data-add-to-cart-text>
+        {% if current_variant.available %}
+        Add To Bag
+        {% else %}
+        {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+  </div>
+</div>
+{% endform %}
+</div>

@@ -1,0 +1,126 @@
+{% paginate blog.articles by 13 %}
+{% assign offset_value = 0 %}
+    {% if section.settings.show_featured_post %}
+        {% assign offset_value = 1 %}
+            {% for article in blog.articles limit:1 %}
+                <div class="banner-wrap banner-blog" id="banner-wrap"
+                    {% if article.image %}
+                        style="background-image: url(https:{{ article.image.src | img_url: 'master' }});background-size:cover;"
+                    {% else %}
+                        style="background-image: url(https:{{ 'banner-blog.png' | asset_url  }});background-size:cover;"
+                    {% endif %}>
+                    {% if article.image %}
+                        <div class="banner-mobile-img">
+                            <a href="{{ article.url }}" title="{{ article.title | escape }}">
+                                <img src="{{ article.image.src | img_url: 'master' }}"/>
+                            </a>
+                        </div>
+                    {%else%}
+                        <div class="banner-mobile-img">
+                            <a href="{{ article.url }}" title="{{ article.title | escape }}">
+                                {{ 'banner-blog.png' | asset_img_url | img_tag }}
+                            </a>
+                        </div>
+                    {%endif%}
+                <div class="container d-flex flex-wrap">
+                    <div class="banner-blog-content ml-auto">
+                        <h3>{% if current_tags %}{{ current_tags }}{% else %}{{blog.title}}{% endif %}</h3>
+                        <a href="{{ article.url }}" title="{{ article.title | escape }}"><h2>{{article.title}}</h2></a>
+                       	{% if article.excerpt.size > 0 %}
+                        	{{ article.excerpt }}
+                        {% else %}
+                        	<p>{{ article.content | strip_html | trim | truncate: 330 }}</p>
+                        {% endif %}
+                            <a href="{{ article.url }}" title="{{ article.title | escape }}" class="read">{{section.settings.text_readmore}}</a>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+    {% endif %}
+
+<div class="collection-select">
+    <label>Category</label>
+    <select onchange="redirect_to_page(this.value);">
+      {% for link in linklists.sidebar-blog.links %}
+        <option value="{{ link.url }}">{{link.title}}</option>
+      {% endfor %}
+    </select>
+</div>
+
+<div class="main-outer main-outer-blog" id="float-conttainer-wrap">
+    <div class="main-sidebar">
+      <div id="wrap-in">
+        <ul>
+          {% for link in linklists.sidebar-blog.links %}
+            {% if current_tags %}
+            <li><a href="{{ link.url }}" {% if link.active and link.title != 'All' %}class="active"{% endif %}>{{link.title}}</a></li>
+            {% else %}
+            <li><a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{link.title}}</a></li>
+            {% endif  %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-content main-content-blog">
+        {% if blog.articles_count > 1 %}
+            <div class="row">
+                {% for article in blog.articles offset:offset_value %}
+                    <div class="col-md-6">
+                        <div class="blog-artilce">
+                            <div class="blog-photo">
+                                {% if article.image %}
+                                    <img src="{{ article.image | img_url: '450x250' }}"/>
+                                {%else%}
+                                    {{ 'blog-1.png' | asset_img_url: '450x250' | img_tag }}
+                                {%endif%}
+                                    <a href="{{ article.url }}" title="{{ article.title | escape }}">{{section.settings.text_readmore}}</a>
+
+                            </div>
+                                    <h3>{% if current_tags %}{{ current_tags }}{% else %}{{blog.title}}{% endif %}</h3>
+                                    <a href="{{ article.url }}" title="{{ article.title | escape }}"><h2>{{article.title}}</h2></a>
+                                {% if article.excerpt.size > 0 %}
+                                    {{ article.excerpt }}
+                                {% else %}
+                                    <p>{{ article.content | strip_html | trim | truncate: 200 }}</p>
+                                {% endif %}
+                                    <p><a href="{{ article.url }}" title="{{ article.title | escape }}" class="read">{{section.settings.text_readmore}}</a></p>
+                            </div>
+                        </div>
+                {%endfor%}
+            </div>
+            {% if paginate.pages > 1 %}
+              {% include 'pagination' %}
+            {% endif %}
+      {% else %}
+            <p>{{section.settings.nopost_found}}</p>
+      {% endif %}
+    </div>
+ </div>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_featured_post",
+      "label": "Show featured post?",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "text_readmore",
+      "label": "CTA Label",
+      "default": "Read More"
+    },
+	{
+      "type": "text",
+      "id": "nopost_found",
+      "label": "Post Not Found Text",
+      "default": "No Posts Found in this Category"
+    }
+  ]
+}
+{% endschema %}

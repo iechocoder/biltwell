@@ -1,0 +1,129 @@
+{% assign offset_value = 0 %}
+{% assign title = section.settings.title %}
+{% assign text = section.settings.text %}
+{% assign featuredimage = section.settings.image %}
+{% if section.settings.posts_enabled %} 
+    <section class="blogsection">
+        <div class="row no-gutters">
+            {% if section.settings.customizer_featured_post_enabled and title and text and featuredimage%}
+                <div class="col-sm-12 col-lg-6 wow fadeInLeft" data-wow-duration="2s">
+                    <div class="featuredimg" style="background-image: url({{ featuredimage | img_url : 'master' }});">
+                        <img src="{{ featuredimage | img_url : 'master' }}" />
+                        <div class="featuredimg-desc">
+                            <h4>{{title}}</h4>
+                            {{text}}
+                            <a href="{%if section.settings.link_url %} {{section.settings.link_url}} {%else%} # {%endif%}">
+                                {{ section.settings.link_text }}
+                            </a>
+                        </div>
+                    </div>    
+                </div>    
+            {%else%}     
+            {% assign offset_value = 1 %}
+            {% for article in blogs.motorcycle-stuff.articles limit:1 %}
+                <div class="col-sm-12 col-lg-6 wow fadeInLeft" data-wow-duration="2s">
+                    <div class="featuredimg" 
+                        {% if article.image %}
+                            style="background-image: url(https:{{ article.image.src | img_url: 'master' }});"
+                        {% else %}
+                            style="background-image: url(https:{{ 'featuredblog.png' | asset_url  }});"
+                        {% endif %}
+                    > 
+                    <div class="featuredimg-desc">
+                        <h4>{{article.title}}</h4>
+                            {% if article.excerpt.size > 0 %}
+                                {{ article.excerpt }}
+                            {% else %}
+                                <p>{{ article.content | strip_html | trim | truncate: 150 }}</p>
+                            {% endif %}
+                                <a href="{{ article.url }}">Read more</a>
+                    </div>
+                    </div>    
+                </div>
+            {% endfor %}
+            {%endif%} 
+                <div class="col-sm-12 col-lg-12 col-xl-6 hideblogmobile wow fadeInRight" data-wow-duration="2s">
+                    <ul>
+                        {% for article in blogs.motorcycle-stuff.articles offset:offset_value limit:3 %}
+                            <li>
+                            {% if article.image %}
+                                <a href="{{ article.url }}">
+                                  	{{ article.image | img_url: '278x188' | img_tag: article.title }}
+                              </a>  
+                            {% else %}
+                              <a href="{{ article.url }}">
+                                {{ 'blog1.png' | asset_url | img_tag : 'Small Image', 'class1' , 'master' }}
+                              </a>  
+                            {% endif %}
+                                <div class="blogsection-detail">
+                                    <h5>{{article.title}}</h5>
+                                    {% if article.excerpt.size > 0 %}
+                                        {{ article.excerpt }}
+                                    {% else %}
+                                        <p>{{ article.content | strip_html | trim | truncate: 100 }}</p>
+                                    {% endif %}
+                                </div>                        
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+        </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Blog Posts",
+    "settings": [
+    {
+    "type":"checkbox",
+    "id":"posts_enabled",
+    "label":"Posts Section",
+    "default": true
+    },
+    {
+    "type":"checkbox",
+    "id":"customizer_featured_post_enabled",
+    "label":"Customizer Featured Post",
+    "default": false
+    },
+    {
+    "type":"header",
+    "content":"Featured Post"
+    },  
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Dummy text of the printing and typesetting inudustry. Lorem ipsum has been</p>"
+      },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text",
+    "default": "Read More"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blog Posts",
+        "category": "content"
+      }
+    ]
+  }
+{% endschema %}

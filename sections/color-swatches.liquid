@@ -1,0 +1,102 @@
+<script>
+  // we cannot send these variables through Liquid due to Scoping so we'll have to rely on Javascript
+  window.ColorSwatches = window.ColorSwatches || {};
+</script>
+
+{% comment %} Add the hard-coded ones but let them be replaced by admin input {% endcomment %}
+<script>
+window.ColorSwatches['flat-copper'] = "{{ 'copper.jpg' | asset_url }}";
+window.ColorSwatches['flat-black'] = "{{ 'flatblack.jpg' | asset_url }}";
+window.ColorSwatches['gloss-black'] = "{{ 'glossblack.jpg' | asset_url }}";
+window.ColorSwatches['gloss-vintage-white'] = "{{ 'glossvintagewhite.jpg' | asset_url }}";
+window.ColorSwatches['flat-primer'] = "{{ 'flatprimer.jpg' | asset_url }}";
+window.ColorSwatches['flat-titanium'] = "{{ 'flattitanium.jpg' | asset_url }}";
+window.ColorSwatches['brite-silver-mf'] = "{{ 'britesilvermf.jpg' | asset_url }}";
+window.ColorSwatches['le-spectrum-black-orange'] = "{{ 'blackorange.jpg' | asset_url }}";
+window.ColorSwatches['rootbeer-mf'] = "{{ 'rootbeermf.jpg' | asset_url }}";
+window.ColorSwatches['midnight-black-miniflake'] = "{{ 'mignight.jpg' | asset_url }}";
+window.ColorSwatches['fury-white-blue'] = "{{ 'furywhiteblue.jpg' | asset_url }}";
+window.ColorSwatches['wine-red-mf'] = "{{ 'winered.jpg' | asset_url }}";
+window.ColorSwatches['wine-mf'] = "{{ 'winered.jpg' | asset_url }}";
+window.ColorSwatches['le-racer-red-white'] = "{{ 'leracerredwhite.jpg' | asset_url }}";
+window.ColorSwatches['gang-green-mf'] = "{{ 'ganggreen.jpg' | asset_url }}";
+window.ColorSwatches['le-racer-vintage-gloss-white'] = "{{ 'vintageglosswhite.jpg' | asset_url }}";
+window.ColorSwatches['le-spectrum-white-silver'] = "{{ 'spectrumwhitesilver.jpg' | asset_url }}";
+window.ColorSwatches['racer-black-grey-gold'] = "{{ 'racerblackgold.jpg' | asset_url }}";
+window.ColorSwatches['black-grey'] = "{{ 'grey.jpg' | asset_url }}";
+window.ColorSwatches['le-racer-red-white-blue'] = "{{ 'leracerredwhite.jpg' | asset_url }}";
+window.ColorSwatches['fury-black-grey-gold'] = "{{ 'grey.jpg' | asset_url }}";
+window.ColorSwatches['black-gold-miniflake'] = "{{ 'trackerblackgold.jpg' | asset_url }}";
+window.ColorSwatches['rootbeer-megaflake'] = "{{ 'rootbeermf.jpg' | asset_url }}";
+window.ColorSwatches['racer-flat-cream-orange'] = "{{ 'racercreamorange.jpg' | asset_url }}";
+window.ColorSwatches['gloss-hazard-orange'] = "{{ 'glosshazardorange.jpg' | asset_url }}";
+window.ColorSwatches['bronze-metallic'] = "{{ 'bronzemetallic.jpg' | asset_url }}";
+window.ColorSwatches['gloss-blue-steel'] = "{{ 'glossbluesteel.jpg' | asset_url }}";
+window.ColorSwatches['gloss-blood-red'] = "{{ 'glossbloodred.jpg' | asset_url }}";
+window.ColorSwatches['tracker-black-vintage-white'] = "{{ 'color-img.png' | asset_url }}";
+window.ColorSwatches['gloss-agave'] = "{{ 'glossagave.jpg' | asset_url }}";
+window.ColorSwatches['tracker-black-silver'] = "{{ 'trackerblacksilver.jpg' | asset_url }}";
+window.ColorSwatches['flat-olive'] = "{{ 'flatolive.jpg' | asset_url }}";
+window.ColorSwatches['racer-green-cream'] = "{{ 'racergreen.jpg' | asset_url }}";
+window.ColorSwatches['sierra-green'] = "{{ 'sierragreen.jpg' | asset_url }}";
+window.ColorSwatches['safe'] = "{{ 'safeyellow.jpg' | asset_url }}";
+window.ColorSwatches['cast-bonanza-helmet'] = "{{ 'color-img.png' | asset_url }}";
+window.ColorSwatches['tracker-black-gold'] = "{{ 'color-img.png' | asset_url }}";
+window.ColorSwatches['gloss-black-w-black'] = "{{ 'gloss-black-w-black.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-black-orange'] = "{{ 'spec-black-orange.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-blue-blue'] = "{{ 'spec-blue-blue.jpg' | asset_url }}";
+window.ColorSwatches['scallop-white-red'] = "{{ 'scallop-red-white.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-gang-green-mf'] = "{{ 'spec-gang-green.jpg' | asset_url }}";
+window.ColorSwatches['scallop-black-orange'] = "{{ 'scallop-black-orange.jpg' | asset_url }}";
+window.ColorSwatches['tracker-vintage-white-black'] = "{{ 'tracker-vintage-black-white.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-gloss-white'] = "{{ 'spec-gloss-white.jpg' | asset_url }}";
+window.ColorSwatches['tracker-gloss-black-gold'] = "{{ 'tracker-gloss-black-gold.jpg' | asset_url }}";
+window.ColorSwatches['gloss-baja-blue'] = "{{ 'gloss-baja-blue.jpg' | asset_url }}";
+window.ColorSwatches['flat-chocolate'] = "{{ 'flat-chocolate.jpg' | asset_url }}";
+window.ColorSwatches['charcoal-metallic'] = "{{ 'charcoal-metallic.jpg' | asset_url }}";
+window.ColorSwatches['vintage-desert'] = "{{ 'vintage-desert.jpg' | asset_url }}";
+window.ColorSwatches['tracker-red-white-blue'] = "{{ 'tracker-red-white-blue.jpg' | asset_url }}";
+window.ColorSwatches['tri-stripe-white'] = "{{ 'tri-stripe-white.jpg' | asset_url }}";
+window.ColorSwatches['bourbon-metallic'] = "{{ 'bourbon-metallic.jpg' | asset_url }}";
+window.ColorSwatches['flames-black-grey'] = "{{ 'flames-black-grey.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-gloss-black-orange'] = "{{ 'spec-black-orange.jpg' | asset_url }}";
+window.ColorSwatches['spectrum-wine-red-mf'] = "{{ 'spectrum-wine-red-mf.jpg' | asset_url }}";
+window.ColorSwatches['chrome'] = "{{ 'chrome.jpg' | asset_url }}";
+</script>
+
+{% assign color_swatches = '' %}
+{% for swatch in section.blocks %}
+  {% assign color_url = swatch.settings.image | img_url %}
+  {% assign color_name = swatch.settings.name %}
+  {% assign color_name = color_name | replace: ' ','-' | downcase %}
+  {% assign color_name = color_name | replace: '/','-' %}
+  {% assign color_name = color_name | replace: "'",'-' %}
+  <script>
+    window.ColorSwatches['{{color_name}}'] = '{{color_url}}';
+  </script>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Color Swatches",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "image_picker",
+        "name": "Swatch",
+        "settings": [
+            {
+              "id": "name",
+              "type": "text",
+              "label": "Name"
+            },
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

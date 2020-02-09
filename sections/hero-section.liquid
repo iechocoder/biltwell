@@ -1,0 +1,117 @@
+{% if section.settings.single-image-hero %}
+<style type="text/css">
+  .banner .banner-detail h1{
+    {%if section.settings.headingcolor %}color:{{section.settings.headingcolor}}; {%endif%}
+  }
+  .banner .banner-detail p{
+    {%if section.settings.taglinecolor %}color:{{section.settings.taglinecolor}}; {%endif%}
+  }
+  .banner .banner-detail a{
+    {%if section.settings.buttontxtcolor %} color:{{section.settings.buttontxtcolor}};{%endif%}
+    {%if section.settings.buttonbgcolor %} background-color:{{section.settings.buttonbgcolor}};{%endif%}
+  }
+  .banner .banner-detail a:hover{
+    {%if section.settings.btn-mouseover-bg-color %} background-color: {{section.settings.btn-mouseover-bg-color}}; {%endif%}
+    {%if section.settings.btn-mouseover-txt-color %} color:  {{section.settings.btn-mouseover-txt-color}}; {%endif%}
+  } 
+</style> 
+<section class="banner" style="background-image: url(http:{{section.settings.atf_bg_image | img_url: 'master'}})">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="banner-detail">
+                    <h1>
+                        {{section.settings.heading}}
+                    </h1>
+                    <p>
+                        {{section.settings.tagline}}
+                    </p>
+                    <a href="{%if section.settings.cta_link %} {{section.settings.cta_link}} {%else%} # {%endif%}">
+                        {{ section.settings.cta_text }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+"name": "Hero Section",
+"class": "hero-section",
+"settings": [
+              {
+                "id": "single-image-hero",
+                "type": "checkbox",
+                "label": "Enable Hero Section",
+                "default": true
+              },
+              {
+                "id": "atf_bg_image",
+                "type": "image_picker",
+                "label": "Background Image"
+              },
+              {
+                "id": "heading",
+                "type": "text",
+                "label": "Heading",
+                "default": "H1 Title Here"
+              },
+              {
+                "type": "color",
+                "id": "headingcolor",
+                "label": "Heading color",
+                "default": "#fff"
+              },
+              {
+                "id": "tagline",
+                "type": "text",
+                "label": "Sub title",
+                "default": "5 gift ideas that don’t suck"
+              },
+              {
+                "type": "color",
+                "id": "taglinecolor",
+                "label": "Subtitle color",
+                "default": "#fff"
+              },
+              {
+                "id":  "cta_text",
+                "type": "text",
+                "label": "Text for CTA label/link"
+              },
+              {
+                "id":  "cta_link",
+                "type": "url",
+                "label": "Link for CTA"
+              },
+              {
+                "type": "color",
+                "id": "buttonbgcolor",
+                "label": "Button Background",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "buttontxtcolor",
+                "label": "Button Text Color",
+                "default": "#000"
+              },
+              {
+                "type": "color",
+                "id": "btn-mouseover-bg-color",
+                "label": "Button Mouseover Background",
+                "default": "#000"
+              },
+              {
+                "type": "color",
+                "id": "btn-mouseover-txt-color",
+                "label": "Button Mouseover Text Color",
+                "default": "#fff"
+              }
+
+            ]
+}
+
+{% endschema %}

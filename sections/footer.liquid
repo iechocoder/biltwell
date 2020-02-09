@@ -1,0 +1,486 @@
+{% if section.settings.cta_enabled %}
+    <section class="footer-top-row" >
+        <ul>
+            <li>
+                {% include 'svg-cell' %}
+                {% if section.settings.fblock1_subheading != '' %}
+                    <a href="tel:{{section.settings.fblock1_subheading}}" >
+                {%endif%}
+                <div class="desc">
+                    <span>{{section.settings.fblock1_heading}}</span>
+                    <p>{{section.settings.fblock1_subheading}}</p>
+                </div>
+                {% if section.settings.fblock1_subheading != '' %}
+                    </a>
+                {%endif%}
+            </li>
+
+            <li>
+            {% include 'svg-location' %}
+                {% if section.settings.gmapaddress != '' %}
+                    <a href="{{section.settings.gmapaddress}}" target="_blank">
+                {%endif%}
+                <div class="desc">
+                    <span>{{section.settings.fblock2_heading}}</span>
+                    <p>{{section.settings.fblock2_subheading}}</p>
+                </div>
+            {% if section.settings.fblock2_subheading != '' %}
+                </a>
+            {%endif%}
+            </li>
+
+            <li>
+                {% include 'svg-email' %}
+                {% if section.settings.fblock3_subheading != '' %}
+                    <a href="mailto:{{section.settings.fblock3_subheading}}">
+                {%endif%}
+                <div class="desc">
+                    <span>{{section.settings.fblock3_heading}}</span>
+                    <p>{{section.settings.fblock3_subheading}}</p>
+                </div>
+                {% if section.settings.fblock3_subheading != '' %}
+                    </a>
+                {%endif%}
+            </li>
+
+            <li>
+                {% include 'svg-support' %}
+                {% if section.settings.fblock4_subheading != '' %}
+                    <a href="mailto:{{section.settings.fblock4_subheading}}">
+                {%endif%}
+                <div class="desc">
+                    <span>{{section.settings.fblock4_heading}}</span>
+                    <p>{{section.settings.fblock4_subheading}}</p>
+                </div>
+                {% if section.settings.fblock4_subheading != '' %}
+                    </a>
+                {%endif%}
+            </li>
+
+            <li>
+                {% include 'svg-howto' %}
+                {% if section.settings.urlforhowto != '' %}
+                    <a href="{{section.settings.urlforhowto}}" target="_blank">
+                {%endif%}
+                <div class="desc">
+                    <span>{{section.settings.fblock5_heading}}</span>
+                    <p>{{section.settings.fblock5_subheading}}</p>
+                </div>
+                {% if section.settings.fblock5_subheading != '' %}
+                    </a>
+                {%endif%}
+            </li>
+        </ul>
+    </section>
+{%endif%}
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                    <div class="footer-logo">
+                        <img src="{{'footer_logo.svg' | asset_url }}" class="footer_logo" />
+                    </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
+                {%if section.settings.enablesearch%}
+                    <div class="footer-form">
+                        <form class="search" action="/search">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search" name="q" value="{{ search.terms | escape }}">
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </form>
+                    </div>
+                {%endif%}
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5">
+                {%if section.settings.socialicons%}
+                    <ul class="footer-socialicons">
+                        {% if settings.social_facebook_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_facebook_link }} " target="_blank">
+                                    {% include 'svg-fb-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+
+                        {% if settings.social_twitter_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_twitter_link }} " target="_blank">
+                                    {% include 'svg-tw-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+
+                        {% if settings.social_instagram_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_instagram_link }} " target="_blank">
+                                    {% include 'svg-ig-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+
+                        {% if settings.social_pinterest_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_pinterest_link }} " target="_blank">
+                                    {% include 'svg-pi-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+
+                        {% if settings.social_youtube_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_youtube_link }} " target="_blank">
+                                    {% include 'svg-yt-icon' %}
+                                </a>
+                          </li>
+                        {%endif%}
+
+                        {% if settings.social_tumblr_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_tumblr_link }} " target="_blank">
+                                    {% include 'svg-tm-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+
+                        {% if settings.social_yelp_link != blank %}
+                            <li>
+                                <a href=" {{ settings.social_yelp_link }} " target="_blank">
+                                    {% include 'svg-yp-icon' %}
+                                </a>
+                            </li>
+                        {%endif%}
+                    </ul>
+                {%endif%}
+            </div>
+        </div>
+
+        <div class="row no-gutters footer-detail-row">
+            <div class="col-sm-12 col-md-9">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        {% if section.settings.footer_menu_one_headline != blank%}
+                            <h6 class="footer-list-title">{{section.settings.footer_menu_one_headline}}</h6>
+                        {%endif%}
+                        {% if linklists[section.settings.footer_menu_one].links.size > 0 %}
+                            <ul class="footer-links">
+                                {% for link in linklists[section.settings.footer_menu_one].links %}
+                                    {% if forloop.index > 5 %}
+                                        {% break %}
+                                    {% endif %}
+                                    <li><a href= "{{ link.url }}">{{ link.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {%endif%}
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="footer-center-div">
+                            {% if section.settings.footer_menu_two_headline != blank%}
+                                <h6 class="footer-list-title">{{section.settings.footer_menu_two_headline}}</h6>
+                            {%endif%}
+                            {% if linklists[section.settings.footer_menu_two].links.size > 0 %}
+                                <ul class="footer-links">
+                                    {% for link in linklists[section.settings.footer_menu_two].links %}
+                                        {% if forloop.index > 5 %}
+                                            {% break %}
+                                        {% endif %}
+                                        <li><a href= "{{ link.url }}" target="_BLANK">{{ link.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {%endif%}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="footer-center-div">
+                            {% if section.settings.footer_menu_three_headline != blank%}
+                                <h6 class="footer-list-title">{{section.settings.footer_menu_three_headline}}</h6>
+                            {%endif%}
+                            {% if linklists[section.settings.footer_menu_three].links.size > 0 %}
+                                <ul class="footer-links">
+                                    {% for link in linklists[section.settings.footer_menu_three].links %}
+                                        {% if forloop.index > 5 %}
+                                            {% break %}
+                                        {% endif %}
+                                        <li><a href= "{{ link.url }}">{{ link.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-3">
+                <div class="footer-box">
+                    {% if section.settings.footer_menu_four_headline != blank%}
+                        <h6 class="footer-list-title">{{section.settings.footer_menu_four_headline}}</h6>
+                    {%endif%}
+                    {% if linklists[section.settings.footer_menu_four].links.size > 0 %}
+                        <ul class="footer-links">
+                            {% for link in linklists[section.settings.footer_menu_four].links %}
+                                {% if forloop.index > 5 %}
+                                    {% break %}
+                                {% endif %}
+                                    <li><a href= "{{ link.url }}" {% if link.url contains 'youtube.com' %}target="_BLANK"{% endif %}>{{ link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="row footer-btm-row">
+            <div class="col-sm-6">
+                {% if linklists[section.settings.footer_bottom_linklist].links.size > 0 %}
+                    <ul>
+                        {% for link in linklists[section.settings.footer_bottom_linklist].links %}
+                            {% if forloop.index > 2 %}
+                                {% break %}
+                            {% endif %}
+                                <li><a href= "{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                    </ul>
+                {%endif%}
+            </div>
+            <div class="col-sm-6">
+                <p>&copy; Copyright {% if section.settings.store_name != blank %}<strong>{{ section.settings.store_name }}</strong>{% else %}{{ shop.name | link_to: '/' }}{% endif %} {{ 'now' | date: "%Y" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{ 'swiper.min.js' | asset_url | script_tag }}
+<script type="text/javascript">
+var swiper = new Swiper('.bestseller-slide .swiper-container', {
+  slidesPerView: 5,
+  slidesPerGroup: 5,
+  spaceBetween: 10,
+  autoplay: false,
+  navigation: {
+    nextEl: '.bestseller-slide .swiper-button-next',
+    prevEl: '.bestseller-slide .swiper-button-prev',
+  },
+  breakpoints: {
+    1100: {
+//       spaceBetween: 10,
+    },
+    768: {
+//       slidesPerView: 1,
+    }
+  }
+});
+</script>
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+
+      {
+        "type": "paragraph",
+        "content": "FOOTER BLOCK 1 to 5, BELONGS TO CTA Section"
+      },
+    {
+        "type": "checkbox",
+        "id": "cta_enabled",
+        "label": "Enable CTAs",
+        "default": true
+      },
+      {
+        "type":"header",
+        "content":"CTA for phone"
+      },
+      {
+        "type":"text",
+        "id":"fblock1_heading",
+        "label":"Heading",
+        "default":"Call"
+      },
+      {
+        "type":"text",
+        "id":"fblock1_subheading",
+        "label":"Subheading",
+        "default":"951-699-1500"
+      },
+      {
+        "type":"header",
+        "content":"CTA for visit"
+      },
+      {
+        "type":"text",
+        "id":"fblock2_heading",
+        "label":"Heading",
+        "default":"Visit"
+      },
+    {
+    "type":"text",
+    "id":"gmapaddress",
+    "label":"Google Map Link"
+    },
+      {
+        "type":"text",
+        "id":"fblock2_subheading",
+        "label":"Subheading",
+        "default":"Temecula, CA Showroom"
+      },
+      {
+        "type":"header",
+        "content":"CTA for services"
+      },
+      {
+        "type":"text",
+        "id":"fblock3_heading",
+        "label":"Heading",
+        "default":"Email"
+      },
+      {
+        "type":"text",
+        "id":"fblock3_subheading",
+        "label":"Subheading",
+        "default":"service@biltwellinc.com"
+      },
+      {
+        "type":"header",
+        "content":"CTA for support"
+      },
+      {
+        "type":"text",
+        "id":"fblock4_heading",
+        "label":"Heading",
+        "default":"Tech Support"
+      },
+      {
+        "type":"text",
+        "id":"fblock4_subheading",
+        "label":"Subheading",
+        "default":"tech@biltwellinc.com"
+      },
+      {
+        "type":"header",
+        "content":"CTA for how to"
+      },
+      {
+        "type":"text",
+        "id":"fblock5_heading",
+        "label":"Heading",
+        "default":"How to"
+      },
+      {
+        "type":"text",
+        "id":"fblock5_subheading",
+        "label":"Subheading",
+        "default":"Installation Tips"
+      },
+    {
+        "type":"text",
+        "id":"urlforhowto",
+        "label":"How to URL",
+    "default":"https://www.youtube.com/channel/UCslUsFdJUa1vD69Lg34LDPg"
+      },
+    {
+        "type":"header",
+        "content":"Footer Starts Here"
+      },
+    {
+        "type": "checkbox",
+        "id": "enablelogo",
+        "label": "Show logo",
+        "default": true
+      },
+    {
+        "type": "checkbox",
+        "id": "enablesearch",
+        "label": "Show Search",
+        "default": true
+      },
+    {
+        "type": "checkbox",
+        "id": "socialicons",
+        "label": "Show Social Icons",
+        "default": true
+      },
+    {
+        "type": "image_picker",
+        "id": "footerlogo",
+        "label": "Footer Logo"
+      },
+
+    {
+        "type":"header",
+        "content":"Footer Column 1"
+      },
+      {
+        "type":"text",
+        "id":"footer_menu_one_headline",
+        "label":"Column 1 Heading",
+        "default":"Connect"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_one",
+        "label": "Footer Menu 1"
+      },
+    {
+        "type":"header",
+        "content":"Footer Column 2"
+      },
+      {
+        "type":"text",
+        "id":"footer_menu_two_headline",
+        "label":"Column 2 Heading",
+        "default":"Resellers"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_two",
+        "label": "Footer Menu 2"
+      },
+    {
+        "type":"header",
+        "content":"Footer Column 3"
+      },
+      {
+        "type":"text",
+        "id":"footer_menu_three_headline",
+        "label":"Column 3 Heading",
+        "default":"Resources"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_three",
+        "label": "Footer Menu 3"
+      },
+    {
+        "type":"header",
+        "content":"Footer Column 4"
+      },
+      {
+        "type":"text",
+        "id":"footer_menu_four_headline",
+        "label":"Column 4 Heading",
+        "default":"Resources"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_four",
+        "label": "Footer Menu 4"
+      },
+    {
+        "type":"header",
+        "content":"Footer Bottom"
+      },
+    {
+        "id": "store_name",
+        "type": "text",
+        "label": "Store name",
+        "info": "If left empty, the shop name from settings will be used"
+      },
+      {
+        "id": "footer_bottom_linklist",
+        "type": "link_list",
+        "label": "Footer bottom menu"
+      }
+    ]
+  }
+
+{% endschema %}
+

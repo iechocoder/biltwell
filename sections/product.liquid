@@ -1,0 +1,433 @@
+<div data-section-id="{{ section.id }}" data-section-type="product">
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+  {% assign product_name_words = product.title | split: ' - ' %}
+  {% assign new_product_name = '' %}
+  {% for word in product_name_words %}
+  {% unless forloop.last %}
+  {% assign new_product_name = new_product_name | append: word %}
+  {% endunless %}
+  {% endfor %}
+  {% assign collection_handle = new_product_name | handleize %}
+  {% assign collection_to_use = collections[collection_handle] %}
+  {% assign collectionhandle = collection_to_use.handle%}
+  {% assign collection_to_use_has_products = false %}
+  {% if collection_to_use.products.size > 0 %}
+    {% assign collection_to_use_has_products = true %}
+  {% endif %}
+
+  {% assign has_billboard = false %}
+  {% assign has_dimensions = false %}
+  {% assign has_fitment = false %}
+  {% for tag in product.tags %}
+    {% if tag == 'has-billboard' %}
+      {% assign has_billboard = true %}
+    {% endif %}
+    {% if tag == 'has-dimensions' %}
+      {% assign has_dimensions = true %}
+    {% endif %}
+    {% if tag == 'has-fitment' %}
+      {% assign has_fitment = true %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="container product">
+    <div class="product-row">
+      <div class="p-display wow fadeInLeft" data-wow-duration="2s">
+        {% if product.images.size == 1 %}
+        <div class="thumbnail chocolat wow fadeInLeft"  data-wow-duration="2s">
+          <a class="chocolat-image" href="{{ product.featured_image | img_url: '2000x' }}">
+            {{ product.featured_image | img_url: '484x484' | img_tag: product.title }}
+          </a>
+        </div>
+        {% endif %}
+        {% if product.images.size > 1 %}
+        <div id="slider" class="flexslider">
+          {% unless product.metafields.videos.main-video == blank %}
+          <div class='video-main' style="display: none;">
+            <div class='embed-container'><iframe frameborder='0' data-video="{{product.metafields.videos.main-video}}" allowfullscreen></iframe></div>
+          </div>
+          {% endunless %}
+          <ul class="slides chocolat">
+            {% for image in product.images %}
+
+            {% assign last_image = forloop.length %}
+            {% if has_billboard %}
+              {% comment %} If it has tag has-billboard, do not render last image in slider {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+              {% if has_dimensions %}
+                {% comment %} If it has tag has-dimensions as well, do not render second to last image neither {% endcomment %}
+                {% assign second_to_last_image = forloop.length | minus: 1 %}
+                {% if forloop.index == second_to_last_image %} {% continue %} {% endif %}
+              {% elsif has_fitment %}
+                {% comment %} If it has tag has-fitment as well, do not render second to last image neither {% endcomment %}
+                {% assign second_to_last_image = forloop.length | minus: 1 %}
+                {% if forloop.index == second_to_last_image %} {% continue %} {% endif %}
+              {% endif %}
+            {% elsif has_dimensions %}
+              {% comment %} If it only has tag has-dimensions, only skip last image {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+            {% elsif has_fitment %}
+              {% comment %} If it only has tag has-fitment, only skip last image {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+            {% endif %}
+
+            <li>
+              <a class="chocolat-image" href="{{ image.src | img_url: '2000x' }}">
+                <img src="{{ image.src | img_url: '480x480' }}" alt="{{ image.alt | escape }}" />
+              </a>
+            </li>
+            {% endfor%}
+          </ul>
+        </div>
+        <div id="carousel" class="flexslider">
+          <ul class="slides">
+            {% for image in product.images %}
+
+            {% assign last_image = forloop.length %}
+            {% if has_billboard %}
+              {% comment %} If it has tag has-billboard, do not render last image in slider {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+              {% if has_dimensions %}
+                {% comment %} If it has tag has-dimensions as well, do not render second to last image neither {% endcomment %}
+                {% assign second_to_last_image = forloop.length | minus: 1 %}
+                {% if forloop.index == second_to_last_image %} {% continue %} {% endif %}
+              {% elsif has_fitment %}
+                {% comment %} If it has tag has-fitment as well, do not render second to last image neither {% endcomment %}
+                {% assign second_to_last_image = forloop.length | minus: 1 %}
+                {% if forloop.index == second_to_last_image %} {% continue %} {% endif %}
+              {% endif %}
+            {% elsif has_dimensions %}
+              {% comment %} If it only has tag has-dimensions, only skip last image {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+            {% elsif has_fitment %}
+              {% comment %} If it only has tag has-fitment, only skip last image {% endcomment %}
+              {% if forloop.index == last_image %} {% continue %} {% endif %}
+            {% endif %}
+
+            <li>
+              <img src="{{ image.src | img_url: '120x120' }}" alt="{{ image.alt | escape }}" />
+            </li>
+            {% endfor%}
+          </ul>
+          {% unless product.metafields.videos.main-video == blank %}
+          <a class="play-video" href="#0" data-video="{{product.metafields.videos.main-video}}">Play video</a>
+          {% endunless %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="p-detail wow fadeInRight" data-wow-duration="2s" itemprop="offers" itemscope itemtype="//schema.org/Offer">
+        <meta itemprop="price" content="{{ product.price | money_without_currency }}">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+        <link itemprop="availability" href="//schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+        <div class="detail-head">
+           <ul class="bread-crum">
+              {% if template contains "product" %}
+                {% if collection %}
+                  {% if collection.handle %}
+                  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                  <li>{{ collection.title | replace:'~','' | link_to: url }}</li>
+                  {% endif %}
+                {% else %}
+                      <li>{{ product.type | link_to_type }}</li>
+                {% endif %}
+              {% endif %}
+            </ul>
+          <div class="pro-id">
+            <span class="sku">SKU:</span>
+            <span class="sku variant-sku">{{ current_variant.sku }}</span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="product-title">
+            <div class="pro-col">
+              <h1>{{ product.title }}</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-reviews">
+          <div class="product-stars">
+            <a href="#product-reviews">
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="btm-row">
+          <div class="bottom-rule" data-price-wrapper>
+            <h2 class="product-price" data-product-price>{{ current_variant.price | money }}</h2>
+            {% if section.settings.show_shipping_text%}
+              <div class="pro-shipping open-shipping">
+                  <img src="{{ 'flag-black.svg' | asset_url }}" class="icon-shipping" />
+                  <span>{{section.settings.shipping_text}}</span>
+              </div>
+            {%endif%}
+          </div>
+        </div>
+
+        <!-- Show Colors Option -->
+        {% if collection_to_use_has_products %}
+        <label for="productcolor" id="prcolors">Color: </label>
+        <ul class="select-list colors-list">
+          {% for colorproduct in collections[collectionhandle].products %}
+          {% assign colorname =  colorproduct.title | split: ' - ' %}
+          {% assign splitspace = colorname[1] | strip%}
+          {% assign replacespace = splitspace | replace: ' ','-' | downcase %}
+          {% assign colorswatch = replacespace | replace: '/','-' %}
+          {% assign colorswatch = replacespace | replace: "'",'-' %}
+          {% if product.title != colorproduct.title %}
+          <li value="{{colorname[1] | strip }}">
+            <a href="{{colorproduct.url}}">
+              {% include 'color-swatch'%}
+            </a>
+          </li>
+          {%else%}
+            <li value="{{colorname[1] | strip }}" class="active--color">
+              <a>{% include 'color-swatch'%}</a>
+            </li>
+          {%endif%}
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% form "product", product, data-productid: product.id %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        <div class="add-to-cart">
+           <div class="pro-select {% if has_dimensions or has_fitment %}pro-select--min-height{% endif %}">
+              {% if has_dimensions %}
+              <div class="chart-outer chart-outer--dimensions">
+                <a class="sizing-chart open" href="#">Dimensions</a>
+              </div>
+              {% elsif has_fitment %}
+              <div class="chart-outer chart-outer--dimensions">
+                <a class="sizing-chart open" href="#">Fitment</a>
+              </div>
+              {% endif %}
+            {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+            <div class="selector-wrapper size-input js">
+              <label for="SingleOptionSelector-{{ forloop.index0 }}" >
+                {{ option.name }}
+              </label>
+              <div class="options-list">
+                    				{% for value in option.values %}
+                    					<div class="text-center list-tag">
+                      						<input class="radio-custom" type="radio" name="properties[{{ option.name }}]"
+                                             id="{{option.name}}-{{ forloop.index0 }}"
+                                             data-single-option-selector
+                                             data-index="option{{ option.position }}"
+                                             value="{{ value | escape }}"
+                                             >
+                            					<label for="{{option.name}}-{{ forloop.index0 }}">
+                              					{% assign sizevalue =  value | escape %}
+                                                {% if sizevalue == 'X-SMALL' or sizevalue == 'X-Small'%}
+                                                  {% assign optionvalue = 'XS' %}
+                                                {%endif%}
+                                                {% if sizevalue == 'SMALL' or sizevalue == 'Small'%}
+                                                  {% assign optionvalue = 'S' %}
+                                                {%endif%}
+                                                {% if sizevalue == 'MEDIUM' or sizevalue == 'Medium' %}
+                                                  {% assign optionvalue = 'M' %}
+                                                {%endif%}
+                                                {% if sizevalue == 'LARGE' or sizevalue == 'Large' %}
+                                                  {% assign optionvalue = 'L' %}
+                                                {%endif%}
+                                                {% if sizevalue == 'X-LARGE' or sizevalue == 'X-Large' %}
+                                                  {% assign optionvalue = 'XL' %}
+                                                {%endif%}
+                                                {% if sizevalue == 'XX-LARGE' or sizevalue == 'XX-Large' %}
+                                                  {% assign optionvalue = 'XXL' %}
+                                                {%endif%}
+                                                {%if optionvalue%}
+                                                <span class="value">{{ optionvalue }}</span>
+                                                {%else%}
+                                                <span class="value">{{ sizevalue }}</span>
+                                                {%endif%}
+                                              </label>
+                    					</div>
+                    				{% endfor %}
+                  				</div>
+            </div>
+            {% endfor %}
+            {% endunless %}
+          </div>
+
+          <div class="product-option">
+            <select style="display:none" name="id" class="no-js" data-product-select>
+              <option value="" selected>Select Option</option>
+              {% for variant in product.variants %}
+              <option
+                      {% if variant == current_variant %}selected="selected"{% endif %}
+                      {% unless variant.available %}disabled="disabled"{% endunless %}
+                      value="{{ variant.id }}">
+                {{ variant.title }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="product-atc">
+            <div class="product-quantity">
+              <input min="1" type="number" id="quantity" name="quantity" value="1" />
+            </div>
+            <div class="atc-col">
+              <button type="submit"
+                      name="add"
+                      class="btn btn-red product__add-to-cart btn-full-width"
+                      data-add-to-cart
+                      {% unless current_variant.available %}disabled{% endunless %}>
+                <span data-add-to-cart-text>
+                  {% if current_variant.available %}
+                  Add To Cart
+                  {% else %}
+                  {{ 'products.product.sold_out' | t }}
+                  {% endif %}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {% endform %}
+
+          {% comment %} Analyze description to check if it matches the multi-structure formatting {% endcomment %}
+          {% assign content_to_match_hero = settings.description_hero | default: '<strong>Overview:</strong>' | prepend: '<p>' %}
+          {% assign content_to_match_first_column = settings.description_first_column_match | default: '<strong>Technical Details</strong>' | prepend: '<p>' %}
+          {% assign content_to_match_second_column = settings.description_second_column_match | default: '<strong>Helmet Fitment</strong>,<strong>Install Tips</strong>,<strong>Form and Function</strong>,<strong>Care and Maintenance</strong>' %}
+          {% if product.description contains content_to_match_hero %}
+            {% comment %}
+              As it contains Overview:
+              we need to split it and then re-prepend <p> to make sure we didn't break the HTML
+            {% endcomment %}
+            {% assign description_overview = product.description | split: content_to_match_hero | last %}
+            {% assign description_overview = description_overview | prepend: '<p>' %}
+
+            {% if description_overview contains content_to_match_first_column %}
+              {% comment %}
+                As it contains Technical Details,
+                we need to split it to remove it from the Overview,
+                and then re-prepend it as the split removes the header
+              {% endcomment %}
+              {% assign description_split = description_overview | split: content_to_match_first_column %}
+              {% assign description_overview = description_split | first %}
+              {% assign description_first_column = description_split | last | prepend: content_to_match_first_column %}
+
+              {% comment %}
+                Finally we iterate over each possible second column header
+                If any matches the current content of the first column,
+                we need to split it again and then re-prepend it as the split removes the header.
+                Matching one will stop the forloop from iterating over the rest.
+              {% endcomment %}
+              {% assign possible_second_columns = content_to_match_second_column %}
+              {% assign possible_second_columns = possible_second_columns | split: ',' %}
+              {% for possible_second_column in possible_second_columns %}
+                {% assign possible_second_column = possible_second_column | prepend: '<p>' %}
+                {% if description_first_column contains possible_second_column %}
+                  {% assign description_split = description_first_column | split: possible_second_column %}
+                  {% assign description_first_column = description_split | first %}
+                  {% assign description_second_column = description_split | last | prepend: possible_second_column %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+
+            {% endif %}
+          {% endif %}
+
+          <div class="des-row">
+            <div class="des-col">
+              <h5>Description</h5>
+              <div class="product-description">
+                {% unless description_overview == blank %}
+                {{ description_overview }}
+                {% else %}
+                {{ product.description }}
+                {% endunless %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% unless description_first_column == blank or description_second_column == blank %}
+    <div class="description-row">
+      {% unless description_first_column == blank %}
+      <div class="col1">
+        {{ description_first_column }}
+      </div>
+      {% endunless %}
+      {% unless description_second_column == blank %}
+      <div class="col2">
+        {{ description_second_column }}
+      </div>
+      {% endunless %}
+    </div>
+    {% endunless %}
+
+    {% unless product == empty %}
+    <script type="application/json" data-product-json>
+            {{ product | json }}
+    </script>
+    {% endunless %}
+  </div>
+</div>
+
+{% if has_dimensions or has_fitment %}
+<div class="size-chart">
+  <div class="chart-wrapper">
+    <div class="chart-main">
+      <div class="chart-inner">
+        {% if has_dimensions %}
+        <h3>Dimensions</h3>
+        {% else %}
+        <h3>Fitment</h3>
+        {% endif %}
+        <a class="char-close close" href="#"></a>
+        <h4>{{product.title}}</h4>
+
+        {% if has_billboard %}
+          {% comment %} If it has tag has-billboard, dimensions is the second to last {% endcomment %}
+          {% assign second_to_last = product.images.size | minus: 1 %}
+          {% assign image_to_show = product.images[second_to_last] | img_url: 'master' %}
+        {% else %}
+          {% comment %} If it only has tag has-dimensions, dimensions is the last image {% endcomment %}
+          {% assign image_to_show = product.images.last | img_url: 'master' %}
+        {% endif %}
+
+        <img src="{{image_to_show}}" class="img-fluid" />
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+"name": "Product pages",
+"settings": [
+{
+"type": "checkbox",
+"id": "show_shipping_text",
+"label": "Show shipping Text",
+"default": true
+},
+{
+"type": "text",
+"id": "shipping_text",
+"label": "Shipping Text",
+"default": "FREE SHIPPING IN U.S.A. OVER $100"
+},
+{
+"type": "checkbox",
+"id": "playvideo",
+"label": "Product Has Video",
+"default": false,
+"info": "This will show the Play Video Button."
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,138 @@
+{% if section.settings.header_enabled %}
+<div class="contact-banner" {% if section.settings.bgcolor %} style="background:{{section.settings.bgcolor}}" {%endif%}>
+	<div class="container">
+    	<div class="row">
+        	<div class="col-lg-10 offset-lg-1">
+              	{% if section.settings.title %}
+            		<h2 {% if section.settings.headingcolor %} style="color:{{section.settings.headingcolor}}" {%endif%}>{{section.settings.title}}</h2>
+              	{%endif%}
+              	{% if section.settings.description %}	
+              		<p {% if section.settings.desccolor %} style="color:{{section.settings.desccolor}}" {%endif%}>{{section.settings.description}}</p>
+                {%endif%}    	
+              	{% if section.settings.subtitle %}
+                    <p {% if section.settings.subheadingcolor %} style="color:{{section.settings.subheadingcolor}}" {%endif%}>{{section.settings.subtitle}}</p>
+              	{%endif%}
+            </div>
+        </div>
+     </div>
+</div>
+{%endif%}
+
+{% if section.settings.contact_enabled %}
+<div class="contact-top-wrap">
+	<div class="container">
+    	<div class="row row-gap-lg">
+        	<div class="col-md-6">
+                <div class="contact-top">
+                	<div class="contact-icon">
+                    	{% include 'svg-email-black' %}
+                    </div>
+                    {% if section.settings.emailaddress %}
+                  		<h3><a href="mailto:{{section.settings.emailaddress}}">{{section.settings.emailaddress}}</a></h3>
+                  	{%endif%}
+                  	{% if section.settings.aboutbiltwell %}
+                  		<p>{{section.settings.aboutbiltwell}}</p>
+                  	{%endif%}
+                </div>
+           </div>
+           <div class="col-md-6">
+           		<div class="contact-top">
+                	<div class="contact-icon">
+                    	{% include 'svg-cell-black' %}
+                    </div>
+                  	{% if section.settings.phone %}
+                  		<h3><a href="tel:{{section.settings.phone}}">{{section.settings.phone}}</a></h3>
+                  	{%endif%}
+                    {% if section.settings.aboutbiltwell1 %}
+                  		<p>{{section.settings.aboutbiltwell1}}</p>
+                  	{%endif%}
+                </div>
+           </div>
+        </div>
+  </div>
+</div>
+{%endif%}
+{% schema %}
+  {
+    "name": "Contact Page",
+    "settings": [
+		
+		{
+          "type": "checkbox",
+          "id": "header_enabled",
+          "label": "Header",
+          "default": true
+      	},
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+      	},
+		{
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sub Heading"
+      	},
+		{
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+      	},
+		{
+          "type": "color",
+          "id": "bgcolor",
+          "label": "Header Background",
+          "default": "#2b2b2b"
+        },
+		{
+          "type": "color",
+          "id": "headingcolor",
+          "label": "Heading",
+          "default": "#fff"
+        },
+		{
+          "type": "color",
+          "id": "subheadingcolor",
+          "label": "Sub Heading",
+          "default": "#fff"
+        },
+		{
+          "type": "color",
+          "id": "desccolor",
+          "label": "Description",
+          "default": "#fff"
+        },
+		{
+           "type": "paragraph",
+           "content": "Fields for Contact Section"
+        },
+		{
+          "type": "checkbox",
+          "id": "contact_enabled",
+          "label": "Contact Section",
+          "default": true
+      	},
+		{
+          "type": "text",
+          "id": "emailaddress",
+          "label": "Email Address"
+      	},
+		{
+          "type": "textarea",
+          "id": "aboutbiltwell",
+          "label": "Content Under Email"
+      	},
+		{
+          "type": "text",
+          "id": "phone",
+          "label": "Phone"
+      	},
+		{
+          "type": "textarea",
+          "id": "aboutbiltwell1",
+          "label": "Content Under Phone"
+      	}
+
+	]
+  }
+{% endschema %}

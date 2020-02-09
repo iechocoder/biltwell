@@ -1,0 +1,102 @@
+{% if section.settings.enable_recommendations %}
+
+  {% if collection and collection.all_products_count > 1 %}
+    {% assign col = collection.handle %}
+  {% else %}
+    {% assign col = product.collections.first.handle %}
+  {% endif %}
+
+  {% for tag in product.tags %}
+    {% if tag contains 'related-' %}
+      {% assign related_collection_handle = tag | remove: 'related-' %}
+      {% if collections[related_collection_handle].all_products_count > 0 %}
+        {% assign col = related_collection_handle %}
+        {% assign collection = collections[col] %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  <section class="recommendations">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12 col-md-12 wow fadeInUp" data-wow-duration="2s">
+              {% if section.settings.title != blank %}
+                  <h2 class="recommend-title">{{ section.settings.title }}</h2>
+              {% endif %}
+              {% if section.settings.subtitle != blank %}
+                  {{ section.settings.subtitle }}
+              {% endif %}
+                  <div class="slider-wrap">
+                      <div class="bestseller-flexslider">
+                          <ul class="slides">
+
+                              {% if col and collections[col].all_products_count > 0 %}
+                                {% if collections[col].all_products_count != 1 or collections[col].products.first.id != product.id %}
+                                  {% assign collection = collections[col] %}
+                                  {% case section.settings.productrows %}
+                                    {% when 1 %}
+                                        {%- assign product_in_a_row = 5 -%}
+                                    {% when 2 %}
+                                        {%- assign product_in_a_row = 10 -%}
+                                    {% when 3 %}
+                                        {%- assign product_in_a_row = 15 -%}
+                                  {% endcase %}
+                                  {% for product in collection.products limit: product_in_a_row %}
+                                    {% include 'recommendations-collection-items' %}
+                                  {% endfor %}
+                                {% endif %}
+                              {% endif %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+{%endif%}
+{% schema %}
+{
+  "name": {
+    "en": "Recommendations"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_recommendations",
+      "label": {
+        "en": "Enable Recommendations"
+      }
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "en": "Heading"
+      },
+      "default": {
+        "en": "Recommendations for you"
+      }
+    },
+    {
+      "type": "range",
+      "id": "productrows",
+      "label": {
+        "en": "Number of rows"
+      },
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Recommendations"
+      },
+      "category": {
+        "en": "Collection"
+      }
+    }
+  ]
+}
+{% endschema %}

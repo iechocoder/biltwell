@@ -1,0 +1,84 @@
+{% if section.settings.promise_enabled %}
+<section class="bitwell-promise">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 wow fadeInUp" data-wow-duration="2s">
+                {% if section.settings.title %}
+                    <h2>{{ section.settings.title  }}</h2>
+                {% endif %}
+
+                <ul>
+                    {% for block in section.blocks %}
+                        <li>
+                          {% if block.settings.icon != blank %}
+                              <div class="promis-icon">
+                                  <img src="https://{{ block.settings.icon }}" alt="icon"/>
+                              </div>
+                          {% endif %}
+                          {% if block.settings.blocktitle != blank  %}
+                            {% if block.settings.blocktitle contains 'shipping' %}
+                              <div class="open-shipping">
+                                <img src="{{ 'flag-black.svg' | asset_url }}" class="icon-shipping" />
+                                <h3>{{ block.settings.blocktitle  }}</h3>
+                              </div>
+                            {% else %}
+                              <h3>{{ block.settings.blocktitle  }}</h3>
+                            {% endif %}
+                          {% endif %}
+                          {% if block.settings.description != blank  %}
+                              {{ block.settings.description  }}
+                          {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Promise Blocks",
+    "max_blocks":3,
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "promise_enabled",
+          "label": "Promises Section"
+        },
+       {
+          "id": "title",
+          "type": "text",
+          "label": "Heading",
+          "default": "Heading"
+       }
+    ],
+     "blocks": [
+      {
+        "type": "promise",
+        "name": "Promise",
+        "settings": [
+            {
+                "id": "blocktitle",
+                "type": "text",
+                "label": "Heading",
+                "default": "Block Heading"
+            },
+            {
+                "id": "description",
+                "type": "richtext",
+                "label": "Description",
+                "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales magna elit, in laoreet sem hendrerit eu. Aliquam porta ante at gravida viverra. Donec molestie laoreet enim nec consectetur.</p>"
+            },
+            {
+                "label": "Icon Link",
+                "id": "icon",
+                "type": "text",
+                "info": "Path to icon image asset, SVG is recommended."
+
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

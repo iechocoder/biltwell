@@ -1,0 +1,108 @@
+<div class="container">
+    {% if section.settings.emailsshowroom %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-detail">
+                    <h2>{{section.settings.emailstitle}}</h2>
+                    <ul>
+                        {% for block in section.blocks %}
+                            <li><strong>{{ block.settings.departmentname }}</strong> <span><a href="mailto:{{ block.settings.departmentemail }}">{{ block.settings.departmentemail }}</a></span></li> 
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-detail">
+                    <h2>{{section.settings.showroomtitle}}</h2>
+                    <p>{{section.settings.showroomtiming}}</p>
+                    <p>{{section.settings.showroomaddress}}</p>
+                </div>
+            </div>
+    </div>
+  {%endif%}
+  {% if section.settings.socialicons %}
+        <div class="social-contact">
+            <h2>{{section.settings.socialtitle}}</h2>
+            {% include 'contact-social-template' %}
+        </div>
+  {%endif%}
+</div>
+
+{% if section.settings.mapembed %}
+<div class="contact-iframe">
+  {{section.settings.mapembed}}
+</div>
+{%endif%}
+
+{% schema %}
+  {
+    "name": "Emails/Showroom",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "socialicons",
+            "label": "Social Icons",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "socialtitle",
+            "label": "Social Title"
+          },    
+          {
+            "type": "checkbox",
+            "id": "emailsshowroom",
+            "label": "Emails/Showroom",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "showroomtitle",
+            "label": "Showroom Title"
+          },
+          {
+            "type": "textarea",
+            "id": "showroomtiming",
+            "label": "Showroom Hours"
+          },
+          {
+            "type": "textarea",
+            "id": "showroomaddress",
+            "label": "Showroom Address"
+          },
+          {
+             "type": "paragraph",
+             "content": "Fields for Emails Section"
+          },    
+          {
+            "type": "text",
+            "id": "emailstitle",
+            "label": "Emails Title"
+          },
+		  {
+            "type": "textarea",
+            "id": "mapembed",
+            "label": "MAP IFrame"
+          }
+            
+        ],
+        "blocks": [
+        {
+        "type": "quote",
+        "name": "dept/email",
+        "settings": [
+          {
+            "id": "departmentname",
+            "type": "text",
+            "label": "Dept. Name"
+          },
+          {
+            "id": "departmentemail",
+            "type": "text",
+            "label": "Dept. Email"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,107 @@
+
+<div class="template-login">
+    <div class="login-wrap">
+        <div class="login-section" id="CustomerLoginForm">
+            <h2 class="account__title">{{section.settings.heading}}</h2>
+                {% form 'customer_login' %}
+                    {% if form.errors %}
+                        <div class="account__errors alert alert-danger">
+                            {{ form.errors | default_errors }}
+                        </div>
+                    {% endif %}
+                
+                        <div class="wrap-in">
+                            <label>{{ 'customer.login.email' | t }}</label>
+                            <input
+                                type="email"
+                                aria-describedby="emailHelp"
+                                placeholder="{{ 'customer.login.email' | t }}"
+                                name="customer[email]"
+                                class="form-control {% if form.errors contains 'email' %}input-error{% endif %}"
+                                spellcheck="false"
+                                autocomplete="off"
+                                autocapitalize="off"
+                                autofocus>
+                        </div>
+                        <div class="wrap-in">
+                            <label>{{ 'customer.login.password' | t }}</label>
+                            <a href="#recover" class="forget" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a> 
+                            <input
+                                type="password"
+                                name="customer[password]"
+                                placeholder="{{ 'customer.login.password' | t }}"
+                                class="form-control {% if form.errors contains 'password' %}input-error{% endif %}">
+                        </div>
+
+                        <div class="login-btn-wrap">
+                            <input type="submit" class="btn btn-primary btn-block" value="LOG IN">
+                        </div>
+                        <div class="bot-info">
+                            {{section.settings.askforaccount}} <a href="/account/register">{{section.settings.signuplabel}}</a>
+                        </div>   
+                        
+            {% endform %}
+    </div>
+
+    <div id="RecoverPasswordForm" class="login-section d-none">
+        <h2 class="account__title">{{ 'customer.recover_password.title' | t }}</h2> 
+            {% form 'recover_customer_password' %}
+                {% if form.errors %}
+                    <div class="account__errors alert alert-danger">
+                        {{ form.errors | default_errors }}
+                    </div>
+                {% endif %}
+                {% if form.posted_successfully? %}
+                    <span class="hide reset-password-success"></span>
+                {% endif %}
+                    <div class="wrap-in">
+                        <label for="exampleInputEmail1">{{ 'customer.login.email' | t }}</label>
+                        <input
+                            type="email"
+                            aria-describedby="emailHelp"
+                            placeholder="{{ 'customer.login.email' | t }}"
+                            name="customer[email]"
+                            class="form-control {% if form.errors contains 'email' %}input-error{% endif %}"
+                            spellcheck="false"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            autofocus>
+                    </div>
+                    <div class="login-btn-wrap">
+                        <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.recover_password.submit' | t }}">
+                    </div>
+                    <div class="bot-info">    
+                        <a href="#" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</a>
+                    </div>    
+            {% endform %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Login Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Page Heading",
+        "default": "Welcome back! <br> Log in to your account."
+      },
+      {
+        "type": "text",
+        "id": "askforaccount",
+        "label": "Ask for acount text",
+        "default": "No account?"
+      },
+	  {
+        "type": "text",
+        "id": "signuplabel",
+        "label": "Signup Label",
+        "default": "Sign up here?"
+      }
+	]
+  }
+{% endschema %}
+
+

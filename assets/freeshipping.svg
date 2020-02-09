@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="38px" viewBox="0 0 54 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>delivery-truck-3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="PDP-exploration" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="PDP-Handlebars" transform="translate(-694.000000, -2322.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Group-36" transform="translate(157.000000, 2287.000000)">
+                <g id="delivery-truck-3" transform="translate(564.000000, 54.000000) scale(-1, 1) translate(-564.000000, -54.000000) translate(538.000000, 36.000000)">
+                    <ellipse id="Oval" cx="10.173913" cy="31.5" rx="4.52173913" ry="4.5"></ellipse>
+                    <ellipse id="Oval" cx="41.826087" cy="31.5" rx="4.52173913" ry="4.5"></ellipse>
+                    <path d="M5.65217391,31.5 L2.26086957,31.5 C1.01222578,31.5 -4.09643334e-13,30.4926407 -4.09894341e-13,29.25 L-4.09894341e-13,20.28375 C-0.000801470282,19.5560071 0.352129767,18.8728184 0.947304348,18.45 L7.91304348,15.75 L9.7466087,6.20325 C9.99860316,5.20215511 10.9026379,4.50002713 11.9396522,4.5 L20.3478261,4.5 L20.3478261,2.25 C20.3478261,1.00735931 21.3600519,0 22.6086957,0 L49.7391304,0 C50.9877742,0 52,1.00735931 52,2.25 L52,29.25 C52,30.4926407 50.9877742,31.5 49.7391304,31.5 L46.3478261,31.5" id="Path"></path>
+                    <path d="M14.6956522,31.5 L37.3043478,31.5" id="Path"></path>
+                    <path d="M20.3478261,4.5 L20.3478261,27" id="Path"></path>
+                    <path d="M0,24.75 L3.39130435,24.75" id="Path"></path>
+                    <path d="M7.91304348,15.75 L20.3478261,15.75" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

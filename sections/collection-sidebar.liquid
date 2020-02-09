@@ -1,0 +1,41 @@
+<div class="main-sidebar">
+    	<div id="wrap-in">
+      		<ul> 
+                {% for link in linklists[section.settings.sidebarmenu].links %}
+                	<li class="{% if link.links != blank %}has-children{%endif%}">
+                    	<a href="#">{{ link.title }}</a>
+                    		{% if link.links != blank %}  
+                        		<ul class="sub-menu">
+                            		{% for child_link in link.links %}  
+                            	  		<li {% if child_link.child_active %}class="has-sub-children"{% endif %}>
+                                			<a href= "{{ child_link.url }}">{{ child_link.title }}</a> 
+                                				{% if child_link.links != blank %}
+                                					<ul class="grandchild">
+                                 		 				{% for grandchild_link in child_link.links %}  
+                                  							<li {% if grandchild_link.active %}class="active {% if grandchild_link.child_active %}child-active{% endif %}"{% endif %}><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                                  						{% endfor %}
+                                					</ul>
+                                				{% endif %}   
+                              			</li>
+                        			{% endfor %}
+                          		</ul>  
+                    		{% endif %}  
+                  	</li>
+              	{% endfor %}
+      		</ul>
+    	</div>
+</div>
+{% schema %}
+  {
+    "name": "Collection Sidebar",
+    "settings": [
+	{
+        "type": "link_list",
+        "id": "sidebarmenu",
+        "label": "Sidebar Menu",
+      	"info": "Menu for sidebar on collection pages"
+      }
+	
+	]
+  }
+{% endschema %}

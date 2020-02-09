@@ -1,0 +1,439 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available in the "Header" section in the theme editor.
+
+  Theme Store required settings
+  - Show announcement
+  - Text: message to announce
+  - Link: link of the announcement bar
+
+{%- endcomment -%}
+    <header class="header">
+        {% if section.settings.announcement_bar_enabled %}
+            <div class="header-showroom-row" {%if section.settings.announ_bg_color %} style="background:{{section.settings.announ_bg_color}}" {%endif%}>
+                <div class="container">
+                    <div class="row">
+                        <p {%if section.settings.announ_txt_color %} style="color:{{section.settings.announ_txt_color}}" {%endif%} >
+                            {{ section.settings.announcement_bar_text | replace: 'Contact us', '<a href="mailto:service@biltwellinc.com" target="_BLANK">Contact us</a>' }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if section.settings.black_bar_enabled %}
+            <div class="header-shipping-row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 open-shipping">
+                            <img src="{{ 'flag-white.svg' | asset_url }}" class="icon-header" />
+                            <span>{{ section.settings.free_shipping_text }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="header-shipping-list">
+                                <ul>
+                                    <li>{% include 'svg-header-search' %}</li>
+                                    <li><a href="/search">search</a></li>
+                                    {% for link in linklists[section.settings.beforemain].links %}
+                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="main-header {% if template != 'index' %}borderbottom {%endif%}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a href="#" class="cart-mobile">
+                                {% include 'basket' %}
+                            </a>
+                            <a class="navbar-brand" href="/">
+                                {% if section.settings.svg_logo_enabled %}
+                                    {% include 'svg-logo-header' %}
+                                {% else %}
+                                    {% if section.settings.logo_image %}
+                                        <img src="{{ section.settings.logo_image | img_url:'master' }}" />
+                                    {% else %}
+                                         {{ 'logo.png' | asset_url | img_tag }}
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="{{section.settings.menulink-1}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   {{section.settings.menuname-1}}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <ul class="nav-helmet-row">
+                                                {% assign helmet_menu = section.settings.helmet_menu | strip %}
+                                                {% assign helmetmenu = linklists[helmet_menu] %}
+                                                {% for link in helmetmenu.links %}
+                                                    {% if link.type == 'collection_link' %}
+                                                        {% assign linkCollection = link.object %}
+                                                        <li>
+                                                            <a href="{{ link.url }}">
+                                                              {% capture image_id %}menu_1_image_{% cycle '1', '2', '3', '4', '5' %}{% endcapture %}
+                                                              <img src="{{ section.settings[image_id] | img_url: '400x' }}" alt="{{ linkCollection.title | replace:'~','' | escape  }}" />
+                                                              <span>{{link.title }}</span>
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="{{section.settings.menulink-2}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   {{section.settings.menuname-2}}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <ul class="nav-helmet-row">
+                                                    {% assign gear_menu = section.settings.gear_menu | strip %}
+                                                    {% assign gearmenu = linklists[gear_menu] %}
+                                                        {% for link in gearmenu.links %}
+                                                        {% if link.type == 'collection_link' %}
+                                                            {% assign linkCollection = link.object %}
+                                                            <li>
+                                                                <a href="{{ link.url }}">
+                                                                    {% capture image_id %}menu_2_image_{% cycle '1', '2', '3', '4', '5' %}{% endcapture %}
+                                                                    <img src="{{ section.settings[image_id] | img_url: '400x' }}" alt="{{ linkCollection.title | replace:'~','' | escape  }}" />
+                                                                    <span>{{link.title }}</span>
+                                                                </a>
+                                                            </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul class="navbar-nav">
+                                    {% for link in linklists[section.settings.megamenu].links %}
+                                        <li class="dropdown" {% if link.active %}class="active {% if link.child_active %}child-active{% endif %}"{% endif %}>
+                                            <a class="nav-link"  {% if link.links != blank %} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %} href="{% unless section.settings.menulink-3 == blank%}{{section.settings.menulink-3}}{% else %}{{ link.url }}{% endunless %}">{{ link.title }}
+                                            </a>
+                                            {% if link.links != blank %}
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <div class="submenu-outer">
+                                                        {% for child_link in link.links %}
+                                                            <ul class="sub-menu">
+                                                                <li {% if child_link.active %}class="active {% if child_link.child_active %}child-active{% endif %}"{% endif %}>
+                                                                    <a href= "{{ child_link.url }}">
+                                                                        <h6>{{ child_link.title }}</h6>
+                                                                    </a>
+                                                                {% if child_link.links != blank %}
+                                                                    <ul class="grandchild">
+                                                                        {% for grandchild_link in child_link.links %}
+                                                                            <li {% if grandchild_link.active %}class="active {% if grandchild_link.child_active %}child-active{% endif %}"{% endif %}><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                {% endif %}
+                                                                </li>
+                                                            </ul>
+                                                         {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="{{section.settings.menulink-4}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   {{section.settings.menuname-4}}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <ul class="nav-helmet-row">
+                                                {% assign apparel_menu = section.settings.apparel_menu | strip %}
+                                                {% assign apparelmenu = linklists[apparel_menu] %}
+                                                {% for link in apparelmenu.links %}
+                                                    {% if link.type == 'collection_link' %}
+                                                        {% assign linkCollection = link.object %}
+                                                        <li>
+                                                            <a href="{{ link.url }}">
+                                                              {% capture image_id %}menu_4_image_{% cycle '1', '2', '3', '4', '5' %}{% endcapture %}
+                                                              <img src="{{ section.settings[image_id] | img_url: '400x' }}" alt="{{ linkCollection.title | replace:'~','' | escape  }}" />
+                                                              <span>{{link.title }}</span>
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav">
+                                    <li class="nav-item nav-item--cart">
+                                        <a class="nav-link nav-link--cart" href="#">
+                                            {% include 'basket' %}
+                                            {{ 'layout.cart.title' | t }}
+                                        </a>
+
+                                        {% include 'cart-popup' %} <!-- cart poppup display -->
+                                    </li>
+                                  {% if shop.customer_accounts_enabled %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% if customer %}/account{% else %}/account/login{% endif %}">
+                                          {% if customer %}
+                                          		Your Account
+                                          {% else %}
+                                          		{{ 'layout.customer.log_in' | t }}
+                                          {% endif %}
+                                        </a>
+                                    </li>
+                                  {% endif %}
+                                  <li class="nav-item nav-item--hide">
+                                      <a class="nav-link" href="/blogs/wtf">WTF Blog</a>
+                                  </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header ends here -->
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+    {
+        "type": "header",
+        "content": "Announcement bar styling"
+      },
+    {
+        "type": "color",
+        "id": "announ_bg_color",
+        "label": "Announcement Background Color",
+        "default": "#ba121a"
+      },
+    {
+        "type": "color",
+        "id": "announ_txt_color",
+        "label": "Announcement Text Color",
+        "default": "#fff"
+      },
+      {
+        "type": "header",
+        "content": "Section Before Main Header"
+      },
+      {
+        "type": "checkbox",
+        "id": "black_bar_enabled",
+        "label": "Show Section Before Main Header",
+        "default": false
+      },
+
+      {
+        "type": "text",
+        "id": "free_shipping_text",
+        "label": "Free Shipping Text",
+        "default": "Free Shipping Text Here"
+      },
+      {
+        "type": "link_list",
+        "id": "beforemain",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "header",
+        "content": "Main Header"
+      },
+      {
+        "type": "checkbox",
+        "id": "svg_logo_enabled",
+        "label": "It will include SVG instead of PNG",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo"
+      },
+      {
+        "type": "header",
+        "content": "Choose Collections and Linklist Menu."
+      },
+    {
+        "type": "text",
+        "id": "menuname-1",
+        "label": "First Menu Name",
+        "default": "Helmet"
+      },
+    {
+        "type": "text",
+        "id": "menulink-1",
+        "label": "First Menu Link",
+        "default": "\/collections\/helmets"
+      },
+    {
+        "type": "link_list",
+        "id": "helmet_menu",
+        "label": "Helmet Menu",
+      "info": "This must be a collection menu"
+      },
+    {
+        "type": "text",
+        "id": "menuname-2",
+        "label": "Second Menu Name",
+        "default": "Gear"
+      },
+    {
+        "type": "text",
+        "id": "menulink-2",
+        "label": "Second Menu Link",
+        "default": "\/collections\/gear"
+      },
+    {
+        "type": "link_list",
+        "id": "gear_menu",
+        "label": "Gear Menu",
+      "info": "This must be a collection menu"
+      },
+    {
+        "type": "text",
+        "id": "menuname-3",
+        "label": "Third Menu Name",
+        "default": "Parts"
+      },
+    {
+        "type": "text",
+        "id": "menulink-3",
+        "label": "Third Menu Link",
+        "default": "\/collections\/parts"
+      },
+      {
+        "type": "link_list",
+        "id": "megamenu",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+    {
+        "type": "text",
+        "id": "menuname-4",
+        "label": "Fourth Menu Name",
+        "default": "Apparel"
+      },
+    {
+        "type": "text",
+        "id": "menulink-4",
+        "label": "Fourth Menu Link",
+        "default": "\/collections\/apparel"
+      },
+    {
+      "type": "link_list",
+      "id": "apparel_menu",
+      "label": "Apparel Menu",
+      "info": "This must be a collection menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_1_image_1",
+      "label": "First Menu Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_1_image_2",
+      "label": "First Menu Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_1_image_3",
+      "label": "First Menu Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_1_image_4",
+      "label": "First Menu Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_1_image_5",
+      "label": "First Menu Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_2_image_1",
+      "label": "Second Menu Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_2_image_2",
+      "label": "Second Menu Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_2_image_3",
+      "label": "Second Menu Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_2_image_4",
+      "label": "Second Menu Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_2_image_5",
+      "label": "Second Menu Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_4_image_1",
+      "label": "Fourth Menu Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_4_image_2",
+      "label": "Fourth Menu Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_4_image_3",
+      "label": "Fourth Menu Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_4_image_4",
+      "label": "Fourth Menu Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_4_image_5",
+      "label": "Fourth Menu Image 5"
+    }
+    ]
+  }
+{% endschema %}
+

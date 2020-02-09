@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="54px" viewBox="0 0 55 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>saving-safe</title>
+    <desc>Created with Sketch.</desc>
+    <g id="PDP-exploration" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="PDP-Handlebars" transform="translate(-1093.000000, -2314.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Group-36" transform="translate(157.000000, 2287.000000)">
+                <g id="saving-safe" transform="translate(937.000000, 28.000000)">
+                    <rect id="Rectangle" x="0.00915015198" y="0" width="52.6133739" height="49.7391304" rx="4.5"></rect>
+                    <path d="M4.58422614,49.7391304 L4.58422614,52" id="Path"></path>
+                    <path d="M48.047448,49.7391304 L48.047448,52" id="Path"></path>
+                    <path d="M6.86261398,36.173913 L6.86261398,38.4347826 C6.86261398,40.9320702 8.91094527,42.9565217 11.43769,42.9565217 L41.1756839,42.9565217 C43.7024286,42.9565217 45.7507599,40.9320702 45.7507599,38.4347826 L45.7507599,11.3043478 C45.7507599,8.80706026 43.7024286,6.7826087 41.1756839,6.7826087 L11.43769,6.7826087 C8.91094527,6.7826087 6.86261398,8.80706026 6.86261398,11.3043478 L6.86261398,13.5652174" id="Path"></path>
+                    <path d="M6.87176413,20.3478261 L6.87176413,29.3913043" id="Path"></path>
+                    <rect id="Rectangle" x="4.58422614" y="13.5652174" width="4.57507599" height="6.7826087"></rect>
+                    <rect id="Rectangle" x="4.58422614" y="29.3913043" width="4.57507599" height="6.7826087"></rect>
+                    <ellipse id="Oval" cx="27.4596061" cy="24.8695652" rx="10.293921" ry="10.173913"></ellipse>
+                    <ellipse id="Oval" cx="27.4596061" cy="24.8695652" rx="5.71884498" ry="5.65217391"></ellipse>
+                    <path d="M27.4596061,14.6956522 L27.4596061,19.2173913" id="Path"></path>
+                    <path d="M20.1806602,17.6754783 L23.4152389,20.8746087" id="Path"></path>
+                    <path d="M17.1656851,24.8695652 L21.7407611,24.8695652" id="Path"></path>
+                    <path d="M20.1806602,32.0636522 L23.4152389,28.8667826" id="Path"></path>
+                    <path d="M27.4596061,35.0434783 L27.4596061,30.5217391" id="Path"></path>
+                    <path d="M34.738552,32.065913 L31.5039733,28.8667826" id="Path"></path>
+                    <path d="M37.7535271,24.8695652 L33.1784511,24.8695652" id="Path"></path>
+                    <path d="M34.738552,17.6754783 L31.5039733,20.8746087" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,54 @@
+{% if section.settings.size_enabled %}
+<section id="sizesection" class="section-bg" style="background-color:{{section.settings.sectionbg}}">
+  <div class="container">
+    <div class="sizing">
+      {% if section.settings.sectitle %}
+          <h2>{{section.settings.sectitle}}</h2>
+      {% endif %}
+      {% if section.settings.description %}
+          {{section.settings.description}}
+      {% endif %}
+      {% if section.settings.sizeimage %}
+      	<div class="center">
+          <img src="{{ section.settings.sizeimage | img_url: 'master' }}"/>
+      </div>
+      {% endif %}
+    </div>
+   </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "HandleBar Size",
+    "settings": [
+		{
+          	"type": "checkbox",
+          	"id": "size_enabled",
+          	"label": "Size Section",
+		  	"default": true 	
+		},
+		{
+          	"id": "sectitle",
+          	"type": "text",
+          	"label": "Heading",
+          	"default": "Section Heading"
+        },
+        {
+          	"id": "description",
+          	"type": "richtext",
+          	"label": "Description"
+        },
+		{
+        	"type": "image_picker",
+        	"id": "sizeimage",
+        	"label": "Handle Image"
+      	},
+		{
+            "type": "color",
+            "id": "sectionbg",
+            "label": "Background",
+            "default": "#fcfcfc"
+         }
+	]
+  }
+{% endschema %}

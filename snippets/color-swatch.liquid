@@ -1,0 +1,123 @@
+<img class="list-icon color-swatch-custom" src="{{ 'color-img.png' | asset_url }}" data-swatch data-handle="{{colorswatch}}" />
+{% comment %}
+{% assign handle = colorswatch %}
+	{% case handle %}
+		{% when 'flat-copper' %}
+			<img class="list-icon" src="{{ 'copper.jpg' | asset_url }}" />
+		{% when 'flat-black' %}
+			<img class="list-icon" src="{{ 'flatblack.jpg' | asset_url }}" />
+		{% when 'gloss-black' %}
+			<img class="list-icon" src="{{ 'glossblack.jpg' | asset_url }}" />
+		{% when 'gloss-vintage-white' %}
+			<img class="list-icon" src="{{ 'glossvintagewhite.jpg' | asset_url }}" />
+		{% when 'flat-primer' %}
+			<img class="list-icon" src="{{ 'flatprimer.jpg' | asset_url }}" />
+		{% when 'flat-titanium' %}
+			<img class="list-icon" src="{{ 'flattitanium.jpg' | asset_url }}" />
+		{% when 'brite-silver-mf' %}
+			<img class="list-icon" src="{{ 'britesilvermf.jpg' | asset_url }}" />
+		{% when 'le-spectrum-black-orange' %}
+			<img class="list-icon" src="{{ 'blackorange.jpg' | asset_url }}" />
+		{% when 'rootbeer-mf' %}
+			<img class="list-icon" src="{{ 'rootbeermf.jpg' | asset_url }}" />
+		{% when 'midnight-black-miniflake' %}
+			<img class="list-icon" src="{{ 'mignight.jpg' | asset_url }}" />
+		{% when 'fury-white-blue' %}
+			<img class="list-icon" src="{{ 'furywhiteblue.jpg' | asset_url }}" />
+		{% when 'wine-red-mf' %}
+			<img class="list-icon" src="{{ 'winered.jpg' | asset_url }}" />
+		{% when 'wine-mf' %}
+			<img class="list-icon" src="{{ 'winered.jpg' | asset_url }}" />
+		{% when 'le-racer-red-white' %}
+			<img class="list-icon" src="{{ 'leracerredwhite.jpg' | asset_url }}" />
+		{% when 'gang-green-mf' %}
+			<img class="list-icon" src="{{ 'ganggreen.jpg' | asset_url }}" />
+		{% when 'le-racer-vintage-gloss-white' %}
+			<img class="list-icon" src="{{ 'vintageglosswhite.jpg' | asset_url }}" />
+		{% when 'le-spectrum-white-silver' %}
+			<img class="list-icon" src="{{ 'spectrumwhitesilver.jpg' | asset_url }}" />
+		{% when 'racer-black-grey-gold' %}
+			<img class="list-icon" src="{{ 'racerblackgold.jpg' | asset_url }}" />
+		{% when 'black-grey' %}
+			<img class="list-icon" src="{{ 'grey.jpg' | asset_url }}" />
+		{% when 'le-racer-red-white-blue' %}
+			<img class="list-icon" src="{{ 'leracerredwhite.jpg' | asset_url }}" />
+		{% when 'fury-black-grey-gold' %}
+			<img class="list-icon" src="{{ 'grey.jpg' | asset_url }}" />
+		{% when 'black-gold-miniflake' %}
+			<img class="list-icon" src="{{ 'trackerblackgold.jpg' | asset_url }}" />
+		{% when 'rootbeer-megaflake' %}
+			<img class="list-icon" src="{{ 'rootbeermf.jpg' | asset_url }}" />
+		{% when 'racer-flat-cream-orange' %}
+			<img class="list-icon" src="{{ 'racercreamorange.jpg' | asset_url }}" />
+		{% when 'gloss-hazard-orange' %}
+			<img class="list-icon" src="{{ 'glosshazardorange.jpg' | asset_url }}" />
+		{% when 'bronze-metallic' %}
+			<img class="list-icon" src="{{ 'bronzemetallic.jpg' | asset_url }}" />
+		{% when 'gloss-blue-steel' %}
+			<img class="list-icon" src="{{ 'glossbluesteel.jpg' | asset_url }}" />
+		{% when 'gloss-blood-red' %}
+			<img class="list-icon" src="{{ 'glossbloodred.jpg' | asset_url }}" />
+		{% when 'tracker-black-vintage-white' %}
+			<img class="list-icon" src="{{ 'color-img.png' | asset_url }}" />
+		{% when 'gloss-agave' %}
+			<img class="list-icon" src="{{ 'glossagave.jpg' | asset_url }}" />
+		{% when 'tracker-black-silver' %}
+			<img class="list-icon" src="{{ 'trackerblacksilver.jpg' | asset_url }}" />
+		{% when 'flat-olive' %}
+			<img class="list-icon" src="{{ 'flatolive.jpg' | asset_url }}" />
+		{% when 'racer-green-cream' %}
+			<img class="list-icon" src="{{ 'racergreen.jpg' | asset_url }}" />
+		{% when 'sierra-green' %}
+			<img class="list-icon" src="{{ 'sierragreen.jpg' | asset_url }}" />
+		{% when 'safe' %}
+			<img class="list-icon" src="{{ 'safeyellow.jpg' | asset_url }}" />
+		{% when 'cast-bonanza-helmet' %}
+			<img class="list-icon" src="{{ 'color-img.png' | asset_url }}" />
+		{% when 'tracker-black-gold' %}
+			<img class="list-icon" src="{{ 'color-img.png' | asset_url }}" />
+		{% when 'gloss-black-w-black' %}
+			<img class="list-icon" src="{{ 'gloss-black-w-black.jpg' | asset_url }}" />
+		{% when 'spectrum-black-orange' %}
+			<img class="list-icon" src="{{ 'spec-black-orange.jpg' | asset_url }}" />
+		{% when 'spectrum-blue-blue' %}
+			<img class="list-icon" src="{{ 'spec-blue-blue.jpg' | asset_url }}" />
+		{% when 'scallop-white-red' %}
+			<img class="list-icon" src="{{ 'scallop-red-white.jpg' | asset_url }}" />
+		{% when 'spectrum-gang-green-mf' %}
+			<img class="list-icon" src="{{ 'spec-gang-green.jpg' | asset_url }}" />
+		{% when 'scallop-black-orange' %}
+			<img class="list-icon" src="{{ 'scallop-black-orange.jpg' | asset_url }}" />
+		{% when 'tracker-vintage-white-black' %}
+			<img class="list-icon" src="{{ 'tracker-vintage-black-white.jpg' | asset_url }}" />
+		{% when 'spectrum-gloss-white' %}
+			<img class="list-icon" src="{{ 'spec-gloss-white.jpg' | asset_url }}" />
+		{% when 'tracker-gloss-black-gold' %}
+			<img class="list-icon" src="{{ 'tracker-gloss-black-gold.jpg' | asset_url }}" />
+		{% when 'gloss-baja-blue' %}
+			<img class="list-icon" src="{{ 'gloss-baja-blue.jpg' | asset_url }}" />
+		{% when 'flat-chocolate' %}
+			<img class="list-icon" src="{{ 'flat-chocolate.jpg' | asset_url }}" />
+		{% when 'charcoal-metallic' %}
+			<img class="list-icon" src="{{ 'charcoal-metallic.jpg' | asset_url }}" />
+		{% when 'vintage-desert' %}
+			<img class="list-icon" src="{{ 'vintage-desert.jpg' | asset_url }}" />
+		{% when 'tracker-red-white-blue' %}
+			<img class="list-icon" src="{{ 'tracker-red-white-blue.jpg' | asset_url }}" />
+		{% when 'tri-stripe-white' %}
+			<img class="list-icon" src="{{ 'tri-stripe-white.jpg' | asset_url }}" />
+		{% when 'bourbon-metallic' %}
+			<img class="list-icon" src="{{ 'bourbon-metallic.jpg' | asset_url }}" />
+		{% when 'flames-black-grey' %}
+			<img class="list-icon" src="{{ 'flames-black-grey.jpg' | asset_url }}" />
+		{% when 'spectrum-gloss-black-orange' %}
+			<img class="list-icon" src="{{ 'spec-black-orange.jpg' | asset_url }}" />
+		{% when 'spectrum-wine-red-mf' %}
+			<img class="list-icon" src="{{ 'spectrum-wine-red-mf.jpg' | asset_url }}" />
+		{% when 'chrome' %}
+			<img class="list-icon" src="{{ 'chrome.jpg' | asset_url }}" />
+
+	{% else %}
+			<img class="list-icon" src="{{ 'color-img.png' | asset_url }}" />
+	{% endcase %}
+{% endcomment %}

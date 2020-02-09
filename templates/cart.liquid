@@ -1,0 +1,60 @@
+<div class="cart-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h2>{{ 'cart.general.title' | t }}</h2>
+        <form action="/cart" method="post" novalidate>
+        	<div class="cart-inner-section">
+            	{% if cart.item_count > 0 %}
+            		{% for item in cart.items %}
+            			<div class="cart-popup-item">
+              				<div class="cart-photo">
+                				<a href="{{ item.url }}">
+                  					{{ item | img_url: '160x217' | img_tag: item.title }}
+                				</a>
+              				</div>
+              				<div class="cart-desc">
+                				<h4><a href="{{ item.url }}" class="product-name">{{ item.product.title }}</a></h4>
+                                <div class="selected-item">
+                                    {% unless item.product.has_only_default_variant %}
+                                        <label>{{ item.variant.title }}</label>
+                                    {% endunless %}
+                                        <input class="qty form-control"
+                                               type="number"
+                                               name="updates[]"
+                                               id="updates_{{ item.key }}"
+                                               value="{{ item.quantity }}"
+                                               min="0"
+                                               aria-label="{{ 'cart.general.item_quantity' | t }}">
+                                </div>
+              		   	  </div>
+                          <div class="cart-item-right">
+                            <div class="cart-amount">{{ item.price | money }}</div>
+                            <div class="remove-cart"><a class="remove-cart" href="/cart/change?line={{ forloop.index }}&quantity=0">Remove</a></div>
+                          </div>
+            		  </div>
+            		{% endfor %}
+            	{% else %}
+            		<p>Uhh Oh, Looks like you haven't added anything yet. <a href="/">Continue Shopping</a></p>
+            	{% endif %}
+          	</div>
+      {% if cart.item_count > 0 %}
+      	<div class="cart-seciton-total-wrap">
+        	<div class="cart-section-total">
+              	<strong>Subtotal</strong>
+              	<strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <div class="cart-bot-btns">
+              	<a href="/" class="btn">Continue Shopping</a>
+              	<input type="submit" name="checkout" class="btn" value="Checkout"/>
+            </div>
+        </div>
+      {% endif %}
+     </form>
+      </div>
+    </div>
+  </div>
+</div><!-- cart-section -->
+
+
+

@@ -1,0 +1,72 @@
+<div class="banner-wrap" id="banner-wrap"
+     style="background: url(https:{% if collection.image %}{{ collection.image | img_url: '2048x2048' }}{% else %}{{ 'hero-img.png' | asset_url }}{% endif %}) center top no-repeat;background-size: cover;">
+		<div class="banner-inner">
+    		<div class="breadcrumb-banner">
+      			<ul>
+        			<li><a href="/">Home</a></li>
+                		{% if collection %}
+                			{% if collection.handle %}
+                				{% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                					<li>{{ collection.title | replace:'~','' | link_to: url }}</li>
+                			{% endif %}
+                		{% endif %}
+      			</ul>
+    		</div>
+        <h1>{% if current_tags %}{{ current_tags }}{% else %}{{collection.title | replace:'~','' }}{% endif %}</h1>
+  		</div>
+</div>
+<!-- banner-wrap -->
+
+<div class="main-outer" id="float-conttainer-wrap">
+
+	<div class="main-content">
+				<div class="article-wrap">
+          {% paginate collection.products by 48 %}
+            <div class="row">
+              {% for product in collection.products %}
+                <div class="col-lg-3 col-md-6 col-6">
+                      <div class="article-section">
+                        <div class="article-photo">
+                            <a href="{{ product.url | within: collection }}">
+                              <img src="{{ product.featured_image | img_url: '250x250' }}" />
+                            </a>
+                        </div>
+                        <a href="{{ product.url | within: collection }}"><p>{{ product.title }}</p></a>
+                        <p class="citem__price">
+                                          {% if product.compare_at_price > product.price %}
+                                              {% if product.price_varies %}
+                                              {%- assign sale_price = product.price | money -%}
+                                              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                                            {% else %}
+                                              {{ 'products.product.on_sale' | t }}
+                                              {{ product.price | money }}
+                                            {% endif %}
+                                          {% else %}
+                                            {% if product.price_varies %}
+                                              {%- assign price = product.price | money -%}
+                                              {{ 'products.product.from_text_html' | t: price: price }}
+                                            {% else %}
+                                              {{ product.price | money }}
+                                            {% endif %}
+
+                                          {% endif %}
+
+                                            {% if product.compare_at_price > product.price %}
+                                              <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                                              <s>{{ product.compare_at_price | money }}</s>
+                                            {% endif %}
+                                            {% unless product.available %}
+                                              <p>{{ 'products.product.sold_out' | t }}</p>
+                                            {% endunless %}
+                                        </p>
+                      </div>
+                </div>
+              {% endfor %}
+            </div>
+            {% if paginate.pages > 1 %}
+              {% include 'pagination' %}
+            {% endif %}
+          {% endpaginate %}
+    			</div>
+  	</div>
+</div>

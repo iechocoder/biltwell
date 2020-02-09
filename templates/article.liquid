@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="blog-single">
+    <div class="blog-single-banner">
+      {% if article.image %}
+      	<img src="{{ article.image.src | img_url: 'master' }}" alt="{{article.title}}">
+      {% else %}
+      	<img src="{{ 'banner-blog.png' | asset_url  }}" alt="{{article.title}}">
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+      	<h6>{{blog.title}}</h6>
+        <h2>{{article.title}}</h2>
+        <p>{{article.published_at | date: format: 'month_day_year' }}</p>
+      	<div class="blog-single-social">
+          <ul>
+            <li><a target="_blank" href="https://pinterest.com/pin/create/button/?url={{article.image.src}}" class="fa fa-pinterest"></a></li>
+            <li><a target="_blank" href="https://twitter.com/home?status=https://{{ request.host }}{{ request.path }}" class="fa fa-twitter"></a></li>
+            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://{{ request.host }}{{ request.path }}
+" class="fa fa-facebook"></a></li>
+          </ul>
+        </div>
+        <div class="blog-sub-article">
+        	<p>{{ article.content  }}</p>
+        </div>
+     </div>
+   </div>
+ </div>
+  <!-- blog-single -->
+</div>

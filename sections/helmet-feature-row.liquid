@@ -1,0 +1,133 @@
+{% if section.settings.helmet-feature-row %}
+    <style type="text/css">
+        .helmet-row .gridbox-link
+        {
+            {%if section.settings.buttontxtcolor %}color:{{section.settings.buttontxtcolor}}; {%endif%}
+            {%if section.settings.buttonborder %} border:1px solid {{section.settings.buttonborder}};{%endif%}
+            {%if section.settings.buttonbgcolor %} background-color:{{section.settings.buttonbgcolor}};{%endif%}
+        }
+        .helmet-row .gridbox-link:hover
+        {
+            {%if section.settings.button_mouseover_txt_color %}color:{{section.settings.button_mouseover_txt_color}}; {%endif%}
+            {%if section.settings.button_mouseover_color %} background-color:{{section.settings.button_mouseover_color}};{%endif%}
+        }
+    </style>
+
+    <section class="helmet-row image-left-row">
+        <div>
+            <div class="row no-gutters right">
+              <div class="col-sm-12 col-md-6 wow fadeInLeft" data-wow-duration="2s" >
+                  <div class="gridbox-detail-col6">
+                      {% if section.settings.title != blank %}
+                          <h2 class="gridbox-title">{{ section.settings.title | escape }}</h2>
+                      {% endif %}
+                      {% if section.settings.text != blank %}
+                          {{ section.settings.text }}
+                      {% endif %}
+                      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+                          <a href="{{ section.settings.button_link }}" class="gridbox-link">{{ section.settings.button_label | escape }}</a>
+                      {% endif %}
+                  </div>
+                  <div class="gridbox-thumbnail showonmobile-left">
+                    {% if section.settings.image != blank %}
+                      <img class="grid-thumbnail" src="{{ section.settings.image | img_url:'master' }}" />
+                    {%else%}
+                      <img src="https://cdn.shopify.com/s/files/1/2593/6580/t/3/assets/helmate.png?6139027273682591467" alt="" class="img-fluid-responsive">
+                    {%endif%}
+                  </div>
+              </div>
+
+              <div class="col-sm-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-duration="2s" data-wow-offset="100">
+                <div class="gridbox-thumbnail hideonmobile-left">
+                  {% if section.settings.image != blank %}
+                    <img class="grid-thumbnail" src="{{ section.settings.image | img_url:'master' }}" />
+                  {%else%}
+                    <img src="https://cdn.shopify.com/s/files/1/2593/6580/t/3/assets/helmate.png?6139027273682591467" alt="" class="img-fluid-responsive">
+                  {%endif%}
+                </div>
+              </div>
+            </div>
+        </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Helmet Feature Row",
+    "settings": [
+      {
+        "id": "helmet-feature-row",
+        "type": "checkbox",
+        "label": "Enable Helmet Row",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Helmets"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Great fit and comfy interior, fit true to size and truly fast shipping to Chile. Amazing classic looks with or without bubbleshield. Cheers Biltwell for your great products!</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Shop all helmets"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Button Styling"
+      },
+      {
+        "type": "color",
+        "id": "buttonborder",
+        "label": "Button Border",
+        "default": "#c4161d"
+        },
+        {
+        "type": "color",
+        "id": "buttonbgcolor",
+        "label": "Button Background Color",
+        "default": "#fff"
+        },
+        {
+        "type": "color",
+        "id": "buttontxtcolor",
+        "label": "Button Text Color",
+        "default": "#c4161d"
+        },
+        {
+        "type": "color",
+        "id": "button_mouseover_color",
+        "label": "Button Mouseover Color",
+        "default": "#c4161d"
+        },
+        {
+        "type": "color",
+        "id": "button_mouseover_txt_color",
+        "label": "Button Mouseover Text Color",
+        "default": "#fff"
+        }
+    ],
+    "presets": [
+      {
+        "name": "Helmet Feature Row",
+        "category": "content"
+      }
+    ]
+  }
+{% endschema %}

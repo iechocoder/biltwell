@@ -1,0 +1,67 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add "Newsletter" section on the Theme Editor.
+
+  Theme Store required settings
+  - Heading: title of the newsletter section
+  - Subheading: description of the newsletter section
+{%- endcomment -%}
+
+<section class="newsletter-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        {% form 'customer' %}
+          {{ form.errors | default_errors }}
+          <h2 class="newsletter-section__title">{{ section.settings.section_title | escape }}</h2>
+          <div class="email-form">
+            <img class="email-form__icon" src="{{ section.settings.email_icon | img_url: 'original' }}" />
+            {% if form.posted_successfully? %}
+              <p style="display:inline;color:#189e2f;">Thanks for subscribing!</p>
+            {% else %}
+              <input name="contact[email]"
+                type="email"
+                value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+                placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                class="search__input email-form__input" />
+            {% endif %}
+              <!-- <button type="submit" name="commit" id="Subscribe">
+                <span>Subscribe</span>
+              </button> -->
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <section>
+  {% if section.settings.section_title != blank %}
+    <label for="Email">{{ section.settings.section_title | escape }}</label>
+  {% endif %}
+  {% if section.settings.subheading != blank %}
+    <p>{{ section.settings.subheading | escape }}</p>
+  {% endif %}
+
+  {% form 'customer' %}
+    {{ form.errors | default_errors }}
+    {% if form.posted_successfully? %}
+      <p>{{ 'general.newsletter_form.confirmation' | t }}</p>
+    {% else %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email"
+        name="contact[email]"
+        id="Email"
+        value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+        placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+        autocorrect="off"
+        autocapitalize="off">
+      <button type="submit" name="commit" id="Subscribe">
+        <span>{{ 'general.newsletter_form.submit' | t }}</span>
+      </button>
+    {% endif %}
+  {% endform %}
+</section> -->
+
+

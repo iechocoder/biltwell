@@ -1,0 +1,198 @@
+{% if section.settings.enabled_video_section %}
+	{% if section.settings.content_type == 'videorow' %}
+		{% include 'video-with-text'%}
+	{%endif%}
+	{% if section.settings.content_type == 'imagerow' %}
+		{% include 'image-with-text'%}
+	{%endif%}
+{% endif %}
+
+
+      
+
+{% schema %}
+  {
+    "name": "Video & Image with text",
+    "settings": [
+	  {
+		"type":"checkbox",
+		"id":"enabled_video_section",
+		"label":"Enable Section",		
+		"default": false
+		
+	  },
+	  {
+        "type": "select",
+        "id": "content_type",
+        "label": "Content Type",
+        "default": "videorow",
+        "options": [
+          {
+            "value": "videorow",
+            "label": "Video with text"
+          },
+          {
+            "value": "imagerow",
+            "label": "Image with text"
+          }
+        ]
+      },	
+	  {
+        "type": "select",
+        "id": "column_division",
+        "label": "Video/Image contains",
+        "default": "50%",
+        "options": [
+          {
+            "value": "50%",
+            "label": "50%"
+          }
+        ]
+      },	
+      {
+        "type": "select",
+        "id": "video_alignment",
+        "label": "Video/Image alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+	  {
+		"type":"paragraph",
+		"content":"This URL will be used in Video with Text Section and it should be embed URL."
+	  },	
+	  {
+        "type": "url",
+        "id": "video_embed_url",
+        "label": "Video Embed URL"
+      },
+	  
+	  {
+        "type": "image_picker",
+        "id": "videoimage",
+        "label": "Video Image"
+      },
+	  	
+	  {
+		"type":"header",
+		"content":"Content Section"
+	  },
+	  {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Heading goes here"
+      },
+	  {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub title",
+        "default": "How to"
+      },	
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+	  {
+		"type":"header",
+		"content":"Section Styling"
+	  },
+	  {
+        "type": "checkbox",
+        "id": "nomargin_enabled",
+        "label": "Top/Bottom No Margin",
+        "default": false
+      },
+	  {
+        "type": "color",
+        "id": "section_background",
+        "label": "Background",
+        "default": "#2b2b2b"
+       },
+	   {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading",
+        "default": "#fff"
+       },
+	   {
+        "type": "color",
+        "id": "sub_heading_color",
+        "label": "Sub Heading",
+        "default": "#fff"
+       },
+	   {
+        "type": "color",
+        "id": "description_color",
+        "label": "Description",
+        "default": "#fff"
+       },
+		{
+		"type":"header",
+		"content":"Button Styling"
+	  },
+       {
+        "type": "color",
+        "id": "buttontxtcolor",
+        "label": "Text",
+        "default": "#fff"
+       },
+	   {
+        "type": "color",
+        "id": "buttonbgcolor",
+        "label": "Background",
+        "default": "#2b2b2b"
+       },	
+	   {
+        "type": "color",
+        "id": "buttonborder",
+        "label": "Border",
+        "default": "#fff"
+       },	
+		{
+        "type": "color",
+        "id": "button_mouseover_txt_color",
+        "label": "Mouseover Text",
+        "default": "#fff"
+        },
+		{
+        "type": "color",
+        "id": "button_mouseover_color",
+        "label": "Mouseover Background",
+        "default": "#2b2b2b"
+        },
+		{
+        "type": "color",
+        "id": "button_mouseover_brdr_color",
+        "label": "Mouseover Border",
+        "default": "#fff"
+        }
+    ],
+    "presets": [
+      {
+        "name": "Video & Image with text",
+        "category": "content"
+      }
+    ]
+  }
+{% endschema %}
